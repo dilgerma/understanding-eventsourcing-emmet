@@ -19,149 +19,45 @@ export type CartItemsReadModel = {
     data: CartItemsReadModelItem[]
 }
 
-
 const evolve = (
     document: CartItemsReadModel | null,
     {type, data: event}: CartCleared | ItemArchived | CartCreated | ItemRemoved | ItemAdded
 ): CartItemsReadModel | null => {
     const state: CartItemsReadModel = {...document, data: [...document?.data ?? []]};
+
     switch (type) {
-        /*
-        AI-TODO start: implement according to the specifications provided.
-        Remove the TODO Comment afterwards.
-
-    # Spec Start
-    Title: spec:  cart items with archived items
-    Comments:
-      - archived items should be removed from the list
-    ### Given (Events):
-      * Item Archived
-      * Item Added
-      * Cart Created
-    ### When (Command): None
-    ### Then:
-      * cart items
-    # Spec End
-
-    # Spec Start
-    Title: spec:  cart items with cleared cart
-    Comments:
-      - Read Model should display an empty list
-    ### Given (Events):
-      * Cart Cleared
-      * Item Added
-      * Cart Created
-    ### When (Command): None
-    ### Then:
-      * cart items
-    # Spec End
-
-    # Spec Start
-    Title: spec:  cart items with removed item
-    Comments:
-      - Read Model should display an empty list
-    ### Given (Events):
-      * Item Removed
-      * Item Added
-      * Cart Created
-    ### When (Command): None
-    ### Then:
-      * cart items
-    # Spec End
-
-    # Spec Start
-    Title: spec:  cart items
-    Comments:
-      - Should display one item in the cart
-    ### Given (Events):
-      * Item Added
-      Fields:
-     - price: 9.99
-      * Cart Created
-    ### When (Command): None
-    ### Then:
-      * cart items
-      Fields:
-     - price: 9.99
-     - totalPrice: 9.99
-    # Spec End
-        AI-TODO end
-        */
         case "CartCleared": {
-            const existing = state.data?.find(item => item.aggregateId === event.aggregateId && item.itemId === event.noFieldMatch)
-
-            if (existing) {
-                Object.assign(existing, {
-                    aggregateId: event.aggregateId
-                })
-            } else {
-                state?.data?.push({
-                    aggregateId: event.aggregateId
-                })
-            }
+            state.data = [];
             return {...state};
         }
-        case "ItemArchived": {
-            const existing = state.data?.find(item => item.aggregateId === event.aggregateId && item.itemId === event.itemId)
 
-            if (existing) {
-                Object.assign(existing, {
-                    aggregateId: event.aggregateId,
-                    itemId: event.itemId
-                })
-            } else {
-                state?.data?.push({
-                    aggregateId: event.aggregateId,
-                    itemId: event.itemId
-                })
-            }
-            return {...state};
-        }
-        case "CartCreated": {
-            const existing = state.data?.find(item => item.aggregateId === event.aggregateId && item.itemId === event.noFieldMatch)
-
-            if (existing) {
-                Object.assign(existing, {
-                    aggregateId: event.aggregateId
-                })
-            } else {
-                state?.data?.push({
-                    aggregateId: event.aggregateId
-                })
-            }
-            return {...state};
-        }
+        case "ItemArchived":
         case "ItemRemoved": {
-            const existing = state.data?.find(item => item.aggregateId === event.aggregateId && item.itemId === event.itemId)
-
-            if (existing) {
-                Object.assign(existing, {
-                    aggregateId: event.aggregateId,
-                    itemId: event.itemId
-                })
-            } else {
-                state?.data?.push({
-                    aggregateId: event.aggregateId,
-                    itemId: event.itemId
-                })
-            }
+            state.data = state.data.filter(item =>
+                !(item.aggregateId === event.aggregateId && item.itemId === event.itemId)
+            );
             return {...state};
         }
+
+        case "CartCreated": {
+            return {...state};
+        }
+
         case "ItemAdded": {
-            const existing = state.data?.find(item => item.aggregateId === event.aggregateId && item.itemId === event.itemId)
+            const existing = state.data.find(item =>
+                item.aggregateId === event.aggregateId && item.itemId === event.itemId
+            );
 
             if (existing) {
-                Object.assign(existing, {
-                    aggregateId: event.aggregateId,
-                    description: event.description,
-                    image: event.image,
-                    price: event.price,
-                    totalPrice: event.price,
-                    productId: event.productId,
-                    itemId: event.itemId
-                })
+                existing.description = event.description;
+                existing.image = event.image;
+                existing.price = event.price;
+                existing.totalPrice = (existing.totalPrice ?? 0) + event.price;
+                existing.productId = event.productId;
+                existing.itemId = event.itemId;
+                existing.aggregateId = event.aggregateId;
             } else {
-                state?.data?.push({
+                state.data.push({
                     aggregateId: event.aggregateId,
                     description: event.description,
                     image: event.image,
@@ -169,10 +65,11 @@ const evolve = (
                     totalPrice: event.price,
                     productId: event.productId,
                     itemId: event.itemId
-                })
+                });
             }
             return {...state};
         }
+
         default:
             return {...state};
     }

@@ -27,9 +27,11 @@ const evolve = (
         case "PriceChanged":
             return {
                 ...document,
-                newPrice: event.newPrice,
-                oldPrice: event.oldPrice,
-                productId: event.productId
+                data: {
+                    newPrice: event.newPrice,
+                    oldPrice: event.oldPrice,
+                    productId: event.productId
+                }
             }
         default:
             return {...state};

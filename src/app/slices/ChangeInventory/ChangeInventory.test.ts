@@ -16,8 +16,8 @@ describe('ChangeInventory Specification', () => {
         const command: ChangeInventoryCommand = {
             type: 'ChangeInventory',
             data: {
-                inventory: 744,
-                productId: "d8481fb3-21e3-4ec8-a96a-9055cdae1ec9"
+                inventory: 228,
+                productId: "f9a0080a-0df4-4ad2-8082-09ee8f3e0f16"
             },
             metadata: {now: new Date()},
         }

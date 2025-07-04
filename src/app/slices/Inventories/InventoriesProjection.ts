@@ -34,8 +34,10 @@ const evolve = (
         case "InventoryChanged":
             return {
                 ...document,
-                inventory: event.inventory,
-                productId: event.productId
+                data: {
+                    inventory: event.inventory,
+                    productId: event.productId
+                }
             }
         default:
             return {...state};

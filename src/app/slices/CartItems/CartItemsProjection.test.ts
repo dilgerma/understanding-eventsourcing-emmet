@@ -7,6 +7,7 @@ import {ItemArchived} from "../../events/ItemArchived"
 import {CartCreated} from "../../events/CartCreated"
 import {ItemRemoved} from "../../events/ItemRemoved"
 import {ItemAdded} from "../../events/ItemAdded"
+import {v4} from "uuid";
 
 describe('CartItems Specification', () => {
     let postgres: StartedPostgreSqlContainer;
@@ -25,19 +26,19 @@ describe('CartItems Specification', () => {
     });
 
     it('spec:  cart items with archived items', async () => {
-        const aggregateId = "4648cc71-f54b-410a-bd1b-18abb4764844"
-        const itemId = "bc176097-66c9-4093-8801-e7c32c59ec8b"
-        const description = "8e91d194-a4f8-4325-ae0b-a6f2a0147f50"
-        const image = "20142c9f-f965-4bd0-9835-586b343efc4b"
-        const price = 18.8373160813593
-        const productId = "6a6c7d3d-80c4-434f-a153-9660db008ce8"
+        const aggregateId = "0ec572c1-ac32-4a06-9cdc-b081d66f53e6"
+        const description = "04f9b789-e598-4a7d-bc69-5b8f14bb3ba0"
+        const image = "1180c700-2efc-4f91-ab89-1a5e7bf70368"
+        const itemId = "83ce0eac-f4e8-4f0c-942f-3da98f01518b"
+        const price = 248.45019201712492
+        const productId = "179e8cd8-211c-4513-a3dc-eb5ca64e6973"
         await given([{
             type: 'ItemArchived',
             data: {
                 aggregateId: aggregateId,
                 itemId: itemId
             },
-            metadata: {streamName: '08125b26-d0c8-45ff-95a5-6335e42cdc61'}
+            metadata: {streamName: '90febdf0-0940-4cde-9794-4fa8dcccd08d'}
         },
             {
                 type: 'ItemAdded',
@@ -49,14 +50,14 @@ describe('CartItems Specification', () => {
                     itemId: itemId,
                     productId: productId
                 },
-                metadata: {streamName: '08125b26-d0c8-45ff-95a5-6335e42cdc61'}
+                metadata: {streamName: '90febdf0-0940-4cde-9794-4fa8dcccd08d'}
             },
             {
                 type: 'CartCreated',
                 data: {
                     aggregateId: aggregateId
                 },
-                metadata: {streamName: '08125b26-d0c8-45ff-95a5-6335e42cdc61'}
+                metadata: {streamName: '90febdf0-0940-4cde-9794-4fa8dcccd08d'}
             }])
             .when([])
             .then(
@@ -64,7 +65,7 @@ describe('CartItems Specification', () => {
                     .fromCollection<CartItemsReadModel>(
                         "CartItems-collection",
                     )
-                    .withId("08125b26-d0c8-45ff-95a5-6335e42cdc61")
+                    .withId("90febdf0-0940-4cde-9794-4fa8dcccd08d")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
@@ -79,18 +80,18 @@ describe('CartItems Specification', () => {
             );
     });
     it('spec:  cart items with cleared cart', async () => {
-        const aggregateId = "433f0eb4-8a7f-48de-a26a-7f1252d11222"
-        const description = "00ddd2bc-8e12-4aff-ab8e-4c0c0566ae67"
-        const image = "60d4b386-afe8-4686-9f54-dfae42774899"
-        const price = 301.6723008735656
-        const itemId = "195780bb-c5fd-4482-8352-75d63071989a"
-        const productId = "07a8144c-b6a4-4bd7-b93b-f228a29a5c25"
+        const aggregateId = "2b6253bf-ca67-4767-ae0e-bbaa12cb95d1"
+        const description = "fead8e9c-a502-4ed6-8f7a-f20f4583c8b3"
+        const image = "4174b987-d612-4f8d-8e79-89cc134e9374"
+        const itemId = "4c50cf7e-a2bc-4c0c-a861-41e5b8c52062"
+        const price = 773.0406688189365
+        const productId = "9503f8a2-08a9-4117-a50e-7cf4f5dc0dc4"
         await given([{
             type: 'CartCleared',
             data: {
                 aggregateId: aggregateId
             },
-            metadata: {streamName: '5972d370-6a25-49ff-a99c-28fee5e7497e'}
+            metadata: {streamName: 'b2f81dac-2fec-491c-b8da-7d69b2e882ff'}
         },
             {
                 type: 'ItemAdded',
@@ -102,14 +103,14 @@ describe('CartItems Specification', () => {
                     itemId: itemId,
                     productId: productId
                 },
-                metadata: {streamName: '5972d370-6a25-49ff-a99c-28fee5e7497e'}
+                metadata: {streamName: 'b2f81dac-2fec-491c-b8da-7d69b2e882ff'}
             },
             {
                 type: 'CartCreated',
                 data: {
                     aggregateId: aggregateId
                 },
-                metadata: {streamName: '5972d370-6a25-49ff-a99c-28fee5e7497e'}
+                metadata: {streamName: 'b2f81dac-2fec-491c-b8da-7d69b2e882ff'}
             }])
             .when([])
             .then(
@@ -117,7 +118,7 @@ describe('CartItems Specification', () => {
                     .fromCollection<CartItemsReadModel>(
                         "CartItems-collection",
                     )
-                    .withId("5972d370-6a25-49ff-a99c-28fee5e7497e")
+                    .withId("b2f81dac-2fec-491c-b8da-7d69b2e882ff")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
@@ -132,19 +133,19 @@ describe('CartItems Specification', () => {
             );
     });
     it('spec:  cart items with removed item', async () => {
-        const aggregateId = "eacc642c-64b5-4d42-82d2-6058da237cdd"
-        const itemId = "6bb5563f-7196-43f1-ba10-99ef5f9f73b5"
-        const description = "e26eb5e5-35f0-462c-9366-6665ab4e51eb"
-        const image = "5bc31f38-1ead-4722-b8ff-5ef8932f5f29"
-        const price = 381.9385954093257
-        const productId = "402ba9a9-3cb0-4dd7-9b90-18d47c308502"
+        const aggregateId = "cba4a8ee-bb2e-498b-9a7e-bb142d269f93"
+        const description = "9adac11f-e31f-4ff9-a853-53faab6d9373"
+        const image = "28843e09-aa3a-48c3-9b1e-14c7daea8dee"
+        const itemId = "04efd502-766c-404c-b736-e1f55ddea864"
+        const price = 456.90483531571755
+        const productId = "f3e9dcc3-0bc0-4009-937e-2b7525a98d17"
         await given([{
             type: 'ItemRemoved',
             data: {
                 aggregateId: aggregateId,
                 itemId: itemId
             },
-            metadata: {streamName: 'b7b732b1-7f02-4588-a937-24c7e5288fe8'}
+            metadata: {streamName: '61726178-7485-4e70-aba6-a9c31ee435b6'}
         },
             {
                 type: 'ItemAdded',
@@ -156,14 +157,14 @@ describe('CartItems Specification', () => {
                     itemId: itemId,
                     productId: productId
                 },
-                metadata: {streamName: 'b7b732b1-7f02-4588-a937-24c7e5288fe8'}
+                metadata: {streamName: '61726178-7485-4e70-aba6-a9c31ee435b6'}
             },
             {
                 type: 'CartCreated',
                 data: {
                     aggregateId: aggregateId
                 },
-                metadata: {streamName: 'b7b732b1-7f02-4588-a937-24c7e5288fe8'}
+                metadata: {streamName: '61726178-7485-4e70-aba6-a9c31ee435b6'}
             }])
             .when([])
             .then(
@@ -171,7 +172,7 @@ describe('CartItems Specification', () => {
                     .fromCollection<CartItemsReadModel>(
                         "CartItems-collection",
                     )
-                    .withId("b7b732b1-7f02-4588-a937-24c7e5288fe8")
+                    .withId("61726178-7485-4e70-aba6-a9c31ee435b6")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
@@ -186,13 +187,19 @@ describe('CartItems Specification', () => {
             );
     });
     it('spec:  cart items', async () => {
-        const aggregateId = "bffe8602-675c-47e9-9788-b897a331de0a"
-        const description = "e3308fcd-51f4-4d6a-9a55-9ba1f3abb32b"
-        const image = "94480716-13a4-452a-a33a-b7e6cb2dbd3b"
+        const aggregateId = "3660c2ef-0796-409f-bde7-6f8cf2e4a780"
+        const description = "4b3b21a5-78cc-4900-8547-b9db4d031e0b"
+        const image = "9aab4448-6a47-4fde-95c1-7892f329e77e"
+        const itemId = "241629c6-5064-415c-8e25-be8745b9173d"
         const price = 9.99
-        const itemId = "a7fb44b9-6a28-4591-9360-7f9e992bc802"
-        const productId = "40cde90a-e2a3-45c7-87e9-ebbd87e946bc"
+        const productId = "ac8583f1-12db-4b92-ae45-284c479fae97"
         await given([{
+            type: 'CartCreated',
+            data: {
+                aggregateId: aggregateId
+            },
+            metadata: {streamName: 'a7c9916b-32ae-4ed9-9975-541fe32a936e'}
+        }, {
             type: 'ItemAdded',
             data: {
                 aggregateId: aggregateId,
@@ -202,14 +209,19 @@ describe('CartItems Specification', () => {
                 itemId: itemId,
                 productId: productId
             },
-            metadata: {streamName: '21da4313-af87-4204-9515-05e16f6a071f'}
+            metadata: {streamName: 'a7c9916b-32ae-4ed9-9975-541fe32a936e'}
         },
             {
-                type: 'CartCreated',
+                type: 'ItemAdded',
                 data: {
-                    aggregateId: aggregateId
+                    aggregateId: aggregateId,
+                    description: description,
+                    image: image,
+                    price: price,
+                    itemId: v4(),
+                    productId: productId
                 },
-                metadata: {streamName: '21da4313-af87-4204-9515-05e16f6a071f'}
+                metadata: {streamName: 'a7c9916b-32ae-4ed9-9975-541fe32a936e'}
             }])
             .when([])
             .then(
@@ -217,14 +229,14 @@ describe('CartItems Specification', () => {
                     .fromCollection<CartItemsReadModel>(
                         "CartItems-collection",
                     )
-                    .withId("21da4313-af87-4204-9515-05e16f6a071f")
+                    .withId("a7c9916b-32ae-4ed9-9975-541fe32a936e")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
                             description: description,
                             image: image,
-                            price: 9.99,
-                            totalPrice: 9.99,
+                            price: price,
+                            totalPrice: 19.98,
                             productId: productId,
                             itemId: itemId
                         }]

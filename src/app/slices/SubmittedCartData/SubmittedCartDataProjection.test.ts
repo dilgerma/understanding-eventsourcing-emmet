@@ -24,12 +24,12 @@ describe('SubmittedCartData Specification', () => {
     });
 
     it('spec: empty submitted cart data', async () => {
-        const aggregateId = "2683ad29-7436-4545-b14a-f28e9ecf28d0"
-        const description = "0f9b0707-4d2a-4c08-b5ed-cf70002851ac"
-        const image = "7bfd6199-443c-4711-974e-a82095545326"
-        const price = 688.0424513528052
-        const itemId = "35706971-fab4-4ff7-8221-753508491c83"
-        const productId = "0555494d-bf48-4df9-9a0b-ed22bad50592"
+        const aggregateId = "5f8ef868-5d03-4f47-8166-6bb9e5c5d931"
+        const description = "6287a4ff-4e78-46a2-92fa-47012919ee71"
+        const image = "53e450ad-8168-4dd7-a912-69e8cfe8406f"
+        const itemId = "9eb3626f-0fbe-4e1d-8a06-e391110857ae"
+        const price = 849.3870364740178
+        const productId = "b8d3b9d2-12c1-487c-88b0-02e4961076ad"
         await given([{
             type: 'ItemAdded',
             data: {
@@ -40,14 +40,14 @@ describe('SubmittedCartData Specification', () => {
                 itemId: itemId,
                 productId: productId
             },
-            metadata: {streamName: 'a567d788-9558-405a-81a1-cb11bfa69b74'}
+            metadata: {streamName: 'c089a832-73a3-4498-9cc6-df3679061899'}
         },
             {
                 type: 'CartCreated',
                 data: {
                     aggregateId: aggregateId
                 },
-                metadata: {streamName: 'a567d788-9558-405a-81a1-cb11bfa69b74'}
+                metadata: {streamName: 'c089a832-73a3-4498-9cc6-df3679061899'}
             }])
             .when([])
             .then(
@@ -55,7 +55,7 @@ describe('SubmittedCartData Specification', () => {
                     .fromCollection<SubmittedCartDataReadModel>(
                         "SubmittedCartData-collection",
                     )
-                    .withId("a567d788-9558-405a-81a1-cb11bfa69b74")
+                    .withId("c089a832-73a3-4498-9cc6-df3679061899")
                     .toBeEqual({
                         data: {
                             aggregateId: aggregateId,
@@ -66,14 +66,14 @@ describe('SubmittedCartData Specification', () => {
             );
     });
     it('spec:  submitted cart data', async () => {
-        const aggregateId = "0b7c55c1-06fd-4cee-938c-23d34aefc510"
+        const aggregateId = "b5867596-f75a-421a-80ab-21a08aae1dfe"
+        const description = "9f259b1c-463a-41a8-a2f1-807a728cebc1"
+        const image = "e1432c62-2b8b-4353-8f38-b38cedfbdbbf"
+        const itemId = "76c1d036-71f6-4463-a671-ccf47b5183b7"
         const orderedProducts = null // todo: handle complex type
-        const totalPrice = 999.6859008154362
-        const description = "ec35816f-5520-42c5-b9ab-f2721bd1cb00"
-        const image = "be9c42c9-557d-457a-9b24-fcb0c366bb1b"
-        const price = 310.4695084951974
-        const itemId = "7130e099-cb8a-4fd9-891e-23f3ca750bcf"
-        const productId = "3e915e64-ff02-47c4-9ea7-40fee8f975c1"
+        const price = 314.2395437864213
+        const productId = "73aa96c4-7bb7-4e14-b30d-5d542bf571c0"
+        const totalPrice = 544.990063891091
         await given([{
             type: 'CartSubmitted',
             data: {
@@ -81,7 +81,7 @@ describe('SubmittedCartData Specification', () => {
                 orderedProducts: orderedProducts,
                 totalPrice: totalPrice
             },
-            metadata: {streamName: '5b9a95b1-5044-43ac-a978-bc8a415995ff'}
+            metadata: {streamName: 'ebdff44f-bc49-412f-ba6a-03b9ead47348'}
         },
             {
                 type: 'ItemAdded',
@@ -93,14 +93,14 @@ describe('SubmittedCartData Specification', () => {
                     itemId: itemId,
                     productId: productId
                 },
-                metadata: {streamName: '5b9a95b1-5044-43ac-a978-bc8a415995ff'}
+                metadata: {streamName: 'ebdff44f-bc49-412f-ba6a-03b9ead47348'}
             },
             {
                 type: 'CartCreated',
                 data: {
                     aggregateId: aggregateId
                 },
-                metadata: {streamName: '5b9a95b1-5044-43ac-a978-bc8a415995ff'}
+                metadata: {streamName: 'ebdff44f-bc49-412f-ba6a-03b9ead47348'}
             }])
             .when([])
             .then(
@@ -108,7 +108,7 @@ describe('SubmittedCartData Specification', () => {
                     .fromCollection<SubmittedCartDataReadModel>(
                         "SubmittedCartData-collection",
                     )
-                    .withId("5b9a95b1-5044-43ac-a978-bc8a415995ff")
+                    .withId("ebdff44f-bc49-412f-ba6a-03b9ead47348")
                     .toBeEqual({
                         data: {
                             aggregateId: aggregateId,

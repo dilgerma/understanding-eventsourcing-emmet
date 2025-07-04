@@ -57,9 +57,11 @@ const evolve = (
         case "CartSubmitted":
             return {
                 ...document,
-                aggregateId: event.aggregateId,
-                orderedProducts: event.orderedProducts,
-                totalPrice: event.totalPrice
+                data: {
+                    aggregateId: event.aggregateId,
+                    orderedProducts: event.orderedProducts,
+                    totalPrice: event.totalPrice
+                }
             }
         default:
             return {...state};

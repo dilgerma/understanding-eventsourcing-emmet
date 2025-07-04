@@ -16,9 +16,9 @@ describe('PublishCart Specification', () => {
         const command: PublishCartCommand = {
             type: 'PublishCart',
             data: {
-                aggregateId: "fff124b1-7566-4a26-b088-6773f3b376fd",
+                aggregateId: "522dab48-fe29-496a-8348-ec905a83f538",
                 orderedProducts: null // todo: handle complex type,
-                totalPrice: 991.5550114952831
+                totalPrice: 439.66349004014813
             },
             metadata: {now: new Date()},
         }
@@ -26,35 +26,35 @@ describe('PublishCart Specification', () => {
         given([{
             type: 'CartPublished',
             data: {
-                aggregateId: "ba823029-fa8b-455d-96a4-6edd78176660"
+                aggregateId: "f997c249-02d7-41b1-be5b-81fd8c481ed6"
             },
 
         },
             {
                 type: 'CartSubmitted',
                 data: {
-                    aggregateId: "f06fb3ea-b4a3-4698-8988-db3bd2e9d2c3",
+                    aggregateId: "4b48a057-2646-4d07-9ce6-62e5a5383f5c",
                     orderedProducts: null // todo: handle complex type,
-                    totalPrice: 212.58408053804322
+                    totalPrice: 510.09434164056853
                 },
 
             },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "e32d61aa-46bd-43ea-b388-0a375d4a3833",
-                    description: "c47a2af5-cf4b-43e7-bb6f-168ee1ef2840",
-                    image: "95ef296d-fe8d-47c6-b14e-3ba5997868e9",
-                    price: 252.37173361244425,
-                    itemId: "16951a16-c743-4187-9922-7fcddf0b7803",
-                    productId: "77e921b3-2991-4146-90b3-bc7ba81a5c1e"
+                    aggregateId: "4449cba1-26db-4baf-b5bd-41267ffde056",
+                    description: "6754caea-a8bb-4577-afd5-9806e57dd5c4",
+                    image: "d1a08da0-f3b4-42cf-a454-7b93053e8c2b",
+                    price: 217.52092508410925,
+                    itemId: "2579f1fd-1f34-47cb-bd36-5bae92f2f9d5",
+                    productId: "174ec6bc-6c4e-4afe-93af-181edda56075"
                 },
 
             },
             {
                 type: 'CartCreated',
                 data: {
-                    aggregateId: "6e6d65e6-aeb1-4fc6-a7aa-1e058cb93ffc"
+                    aggregateId: "5beace41-1a02-4895-b75d-da40ce7d66d3"
                 },
 
             }])

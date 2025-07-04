@@ -28,19 +28,19 @@ describe('CartsWithProducts Specification', () => {
     });
 
     it('spec:  cart with products and item archived', async () => {
-        const aggregateId = "e132ba29-5fb0-4e1f-b221-d002d2915620"
-        const itemId = "01921f73-e8d3-4aef-a941-458495e9d23c"
-        const description = "99731abc-9320-4b3c-b2aa-6e9c1c157804"
-        const image = "967e3211-b91f-4f7c-b562-ab635edaef94"
-        const price = 561.732463147788
-        const productId = "821ee421-6764-43cb-a32e-d9b6a32d4891"
+        const aggregateId = "9dbd497d-bc90-491f-9cfb-ff7d2f625e7f"
+        const description = "06452118-f6a0-45a7-833a-ade5ff28afe5"
+        const image = "d21ed698-1381-4c46-a087-41b8ca0aceea"
+        const itemId = "fb890b41-9488-418c-b124-20624bd5716f"
+        const price = 956.0588023094891
+        const productId = "0851f5bd-663d-47bb-8c9a-2b351c7144a0"
         await given([{
             type: 'ItemArchived',
             data: {
                 aggregateId: aggregateId,
                 itemId: itemId
             },
-            metadata: {streamName: 'a2c1bf8a-5b50-42e5-83fd-67bc42ade4a5'}
+            metadata: {streamName: 'c157a928-a1f3-46dd-b443-619b778b1f09'}
         },
             {
                 type: 'ItemAdded',
@@ -52,14 +52,14 @@ describe('CartsWithProducts Specification', () => {
                     itemId: itemId,
                     productId: productId
                 },
-                metadata: {streamName: 'a2c1bf8a-5b50-42e5-83fd-67bc42ade4a5'}
+                metadata: {streamName: 'c157a928-a1f3-46dd-b443-619b778b1f09'}
             },
             {
                 type: 'CartCreated',
                 data: {
                     aggregateId: aggregateId
                 },
-                metadata: {streamName: 'a2c1bf8a-5b50-42e5-83fd-67bc42ade4a5'}
+                metadata: {streamName: 'c157a928-a1f3-46dd-b443-619b778b1f09'}
             }])
             .when([])
             .then(
@@ -67,7 +67,7 @@ describe('CartsWithProducts Specification', () => {
                     .fromCollection<CartsWithProductsReadModel>(
                         "CartsWithProducts-collection",
                     )
-                    .withId("a2c1bf8a-5b50-42e5-83fd-67bc42ade4a5")
+                    .withId("c157a928-a1f3-46dd-b443-619b778b1f09")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
@@ -77,12 +77,12 @@ describe('CartsWithProducts Specification', () => {
             );
     });
     it('spec:  cart with products', async () => {
-        const aggregateId = "162fbdaa-1148-457f-9054-502f4c0f679f"
-        const description = "da122350-c881-4733-9b13-b6a66b8b67d3"
-        const image = "4251ad01-011f-4f38-b950-fa0ee977a61b"
-        const price = 546.1380701593133
-        const itemId = "1cbd03a6-1725-4117-9610-c2de28e3e963"
-        const productId = "7ad2f2fe-5b21-468f-9cb6-84345d3bc355"
+        const aggregateId = "6d20bb9e-44cc-4143-b816-6dedfe0f1981"
+        const description = "90be2981-2bd0-4ae7-8cd2-f8daec87ba37"
+        const image = "b8a534fb-06c4-4bca-9801-946efb789f01"
+        const itemId = "caf4940a-5e0b-4ed3-8a2b-f308ba8ac063"
+        const price = 768.1188509414393
+        const productId = "e31135b5-1b21-43b8-a8ab-f32e4dc9cc5e"
         await given([{
             type: 'ItemAdded',
             data: {
@@ -93,14 +93,14 @@ describe('CartsWithProducts Specification', () => {
                 itemId: itemId,
                 productId: productId
             },
-            metadata: {streamName: '84733cf5-8eed-4853-b8ec-500723a2e50c'}
+            metadata: {streamName: '2922d14b-b7ed-4652-9918-ab8dd187e950'}
         },
             {
                 type: 'CartCreated',
                 data: {
                     aggregateId: aggregateId
                 },
-                metadata: {streamName: '84733cf5-8eed-4853-b8ec-500723a2e50c'}
+                metadata: {streamName: '2922d14b-b7ed-4652-9918-ab8dd187e950'}
             }])
             .when([])
             .then(
@@ -108,7 +108,7 @@ describe('CartsWithProducts Specification', () => {
                     .fromCollection<CartsWithProductsReadModel>(
                         "CartsWithProducts-collection",
                     )
-                    .withId("84733cf5-8eed-4853-b8ec-500723a2e50c")
+                    .withId("2922d14b-b7ed-4652-9918-ab8dd187e950")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,

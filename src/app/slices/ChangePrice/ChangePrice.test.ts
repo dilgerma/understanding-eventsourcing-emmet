@@ -16,9 +16,9 @@ describe('ChangePrice Specification', () => {
         const command: ChangePriceCommand = {
             type: 'ChangePrice',
             data: {
-                newPrice: 796.1605997339187,
-                oldPrice: 168.7919761628953,
-                productId: "1966ea8a-1f44-4e6f-b708-486ab6968c50"
+                newPrice: 690.4485076790473,
+                oldPrice: 751.9105794797929,
+                productId: "8d19f228-db2e-4e48-ad77-28c1a78da886"
             },
             metadata: {now: new Date()},
         }

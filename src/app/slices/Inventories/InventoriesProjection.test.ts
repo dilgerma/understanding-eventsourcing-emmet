@@ -21,15 +21,15 @@ describe('Inventories Specification', () => {
     });
 
     it('spec:  Inventories', async () => {
-        const inventory = 345
-        const productId = "15e8f4d9-6ef8-42ae-b6de-bc0bf77e54d8"
+        const inventory = 416
+        const productId = "276e033a-86c6-4b96-9ae1-b3c4e1d082d2"
         await given([{
             type: 'InventoryChanged',
             data: {
                 inventory: inventory,
                 productId: productId
             },
-            metadata: {streamName: 'd07e94de-9bcd-4564-8e02-a8533baa6646'}
+            metadata: {streamName: '036cf052-c105-40e8-a102-640011d25edd'}
         }])
             .when([])
             .then(
@@ -37,7 +37,7 @@ describe('Inventories Specification', () => {
                     .fromCollection<InventoriesReadModel>(
                         "Inventories-collection",
                     )
-                    .withId("d07e94de-9bcd-4564-8e02-a8533baa6646")
+                    .withId("036cf052-c105-40e8-a102-640011d25edd")
                     .toBeEqual({
                         data: {
                             inventory: inventory,

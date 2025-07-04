@@ -16,7 +16,7 @@ describe('SubmitCart Specification', () => {
         const command: SubmitCartCommand = {
             type: 'SubmitCart',
             data: {
-                aggregateId: "4729b77b-cd97-4726-b31f-81271b698d0c",
+                aggregateId: "1bd9481a-1c98-404a-becb-00a91643c2f4",
                 orderedProducts: null // todo: handle complex type
             },
             metadata: {now: new Date()},
@@ -25,28 +25,28 @@ describe('SubmitCart Specification', () => {
         given([{
             type: 'CartSubmitted',
             data: {
-                aggregateId: "7219e75b-a445-40ed-aa21-44c42341dfbb",
+                aggregateId: "f554d534-9bce-4e30-a7fe-22a2883fb09d",
                 orderedProducts: null // todo: handle complex type,
-                totalPrice: 494.777030031587
+                totalPrice: 175.8275383800142
             },
 
         },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "b33796ff-16ae-469e-9477-22f2d8006896",
-                    description: "535131bb-f2c9-4f50-a416-bdebd0a725a3",
-                    image: "aee00b16-56ee-4b7d-83f3-589f5d3a57a9",
-                    price: 240.3176106393008,
-                    itemId: "daba039f-a290-43f3-816b-011dc5ce6f2b",
-                    productId: "ea50026b-e495-426f-8272-6d0d7b3aae81"
+                    aggregateId: "b458feea-aeb1-43b1-ab16-b3fba6d549be",
+                    description: "806cbb52-53b0-47c7-b1d3-8a7f68d9838e",
+                    image: "7f8c4a8a-d1a6-4f45-9a40-5f3319648e1e",
+                    price: 878.2854601709925,
+                    itemId: "98da00c0-18f8-4887-94da-2274ced82bab",
+                    productId: "dab02871-e5de-48ec-b382-eb5adfb27abb"
                 },
 
             },
             {
                 type: 'CartCreated',
                 data: {
-                    aggregateId: "501eed96-b997-4dd3-b23d-2b70d4c9ca41"
+                    aggregateId: "2d0c4e3d-ced3-4c1b-bb11-182aef243671"
                 },
 
             }])
@@ -58,7 +58,7 @@ describe('SubmitCart Specification', () => {
         const command: SubmitCartCommand = {
             type: 'SubmitCart',
             data: {
-                aggregateId: "11ede65d-b47e-47e4-a7af-3d29cf3b2111",
+                aggregateId: "6d1bb44a-d8e5-46a2-95dd-e88c6ba727a0",
                 orderedProducts: null // todo: handle complex type
             },
             metadata: {now: new Date()},
@@ -67,20 +67,20 @@ describe('SubmitCart Specification', () => {
         given([{
             type: 'InventoryChanged',
             data: {
-                inventory: 513,
-                productId: "08bdb846-be83-4cb0-bf6e-3f5c49301083"
+                inventory: 199,
+                productId: "969e8a49-087b-41f3-874c-8e3717a6b9ba"
             },
 
         },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "4c242f61-1db6-41e5-b201-ed74b6ad2375",
-                    description: "fb174410-0efb-48b1-b27a-385c23af0285",
-                    image: "5c2e2afc-422a-4bd1-97df-9455c5712106",
-                    price: 176.8873425255577,
-                    itemId: "d5512583-8dbf-489d-a94c-1db318e5e190",
-                    productId: "2dfdb271-812f-43df-a23c-7b2f106b1dbf"
+                    aggregateId: "a975e902-40ed-4248-8734-0e668f7e3c49",
+                    description: "5dce8cba-d564-46ed-891e-ecfab59404d0",
+                    image: "496ecb16-16fd-4563-89f7-9c01656ec9a7",
+                    price: 930.3157618063318,
+                    itemId: "f2e12e6b-03a0-4ba6-9e42-7dbfdd73f995",
+                    productId: "0815f910-a7c5-4ec5-8659-af23988ee685"
                 },
 
             }])
@@ -92,7 +92,7 @@ describe('SubmitCart Specification', () => {
         const command: SubmitCartCommand = {
             type: 'SubmitCart',
             data: {
-                aggregateId: "5de5db34-19cb-406e-83be-64adfb28ac72",
+                aggregateId: "eb123abd-b4ba-4cdb-abc1-3cb0a49f0cd3",
                 orderedProducts: null // todo: handle complex type
             },
             metadata: {now: new Date()},
@@ -107,7 +107,7 @@ describe('SubmitCart Specification', () => {
         const command: SubmitCartCommand = {
             type: 'SubmitCart',
             data: {
-                aggregateId: "6e69fa3e-6626-4e94-a45e-9c7ac1b426a6",
+                aggregateId: "4f6afbdb-e56a-4efd-a218-01086efb8be4",
                 orderedProducts: null // todo: handle complex type
             },
             metadata: {now: new Date()},
@@ -116,12 +116,12 @@ describe('SubmitCart Specification', () => {
         given([{
             type: 'ItemAdded',
             data: {
-                aggregateId: "ddd74a36-bc15-4398-96c4-061f8f4d832f",
-                description: "4569c531-fa4f-4ce1-98bf-2ceff6ec4b59",
-                image: "464e38fe-1dc5-4055-aa14-2fa9d2bd07fb",
-                price: 417.6586784382354,
-                itemId: "fbabdf26-9f05-45e1-9bfe-130efe8702d2",
-                productId: "d29f2608-3890-49f8-8c72-65c99d528fbd"
+                aggregateId: "bb28170e-aa26-46ff-96b7-970c2d260420",
+                description: "59289a60-9825-4d95-acfe-879bebbc8ffc",
+                image: "57b1fade-2122-43be-8037-5ee8b1a67eb6",
+                price: 815.7568349336884,
+                itemId: "8f35af3e-b495-445e-9258-cb7bb46333fb",
+                productId: "0f534de7-8010-443d-b97a-d2028b3222fb"
             },
 
         }])
