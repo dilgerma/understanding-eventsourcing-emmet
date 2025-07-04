@@ -16,8 +16,8 @@ describe('RemoveItem Specification', () => {
         const command: RemoveItemCommand = {
             type: 'RemoveItem',
             data: {
-                aggregateId: "5b4b9fc0-3db8-4bc8-9cdc-b662f6029abb",
-                itemId: "e3010e8d-519b-4c8c-b8ba-8efaa8b93351"
+                aggregateId: "f6053460-ee2e-4b72-ac3d-d8307de35f0c",
+                itemId: "110545bc-eec8-4b9b-8bf5-1a25eac1829e"
             },
             metadata: {now: new Date()},
         }
@@ -25,26 +25,29 @@ describe('RemoveItem Specification', () => {
         given([{
             type: 'ItemRemoved',
             data: {
-                aggregateId: "08570386-2a61-4efb-b7c2-d99ff43d1568",
-                itemId: "112d0409-e24f-439d-bd5b-b3261d4e99cc"
+                aggregateId: "987eb060-4112-46ab-9cf2-a0a16cd8822b",
+                itemId: "a713ccf9-ced0-4086-841c-caf74777e208"
             },
+
         },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "25aae78f-7b86-4528-a0f5-d2218da9c66d",
-                    description: "d7aa3df0-5658-4c06-ba25-1b0e0d2fbd92",
-                    image: "b068a195-a6b1-461b-8de3-9eb454174493",
-                    price: 803.1809348996032,
-                    itemId: "a1ead63d-8151-412d-b6e9-2eb4cabd0626",
-                    productId: "2a85ab89-2a7f-4016-b6bf-a48f96c5a44c"
+                    aggregateId: "76b6b43f-ac10-48b9-be9e-d7093631501d",
+                    description: "06138ab1-82ee-43b7-b93a-2a4915010035",
+                    image: "3653b8d1-147f-46c3-8daa-85b07e564703",
+                    price: 235.68026067717196,
+                    itemId: "d08130a6-06ef-47cc-bab4-8ee8d24c4a97",
+                    productId: "a7d065b9-e46f-4c41-8969-3d7a79ce8fb9"
                 },
+
             },
             {
                 type: 'CartCreated',
                 data: {
-                    aggregateId: "234a7bba-7883-457c-9a04-30233e01a078"
+                    aggregateId: "cef2480c-74e8-462c-8f0f-20ac3850bfd2"
                 },
+
             }])
             .when(command)
             .thenThrows()
@@ -54,8 +57,8 @@ describe('RemoveItem Specification', () => {
         const command: RemoveItemCommand = {
             type: 'RemoveItem',
             data: {
-                aggregateId: "3ec0e8bd-d19b-406f-98b5-9634d04e44f5",
-                itemId: "a82ffa1d-f545-45bc-8c24-872cfc624426"
+                aggregateId: "c0658293-9712-4c56-8d4d-284b8091d7aa",
+                itemId: "1bc0bd2d-577c-4d58-a577-bbae8ffc85be"
             },
             metadata: {now: new Date()},
         }
@@ -63,19 +66,21 @@ describe('RemoveItem Specification', () => {
         given([{
             type: 'ItemAdded',
             data: {
-                aggregateId: "40bac7d1-8d3a-4fa2-9162-149749db9bcc",
-                description: "a2edf795-8c93-4d43-910b-23421c69d632",
-                image: "34415f1e-085c-48a1-adac-5b4276fea607",
-                price: 4.745998340397017,
-                itemId: "f44d4411-d196-41ba-b252-316572e613a6",
-                productId: "e202b752-6cf9-431a-8044-f6ae03dbcf79"
+                aggregateId: "67b42459-a6a4-4b25-893d-ccdbf91c2f26",
+                description: "c0923220-e81a-41bf-a2de-463164aad2ed",
+                image: "db70bd65-915b-4944-aafa-001856900241",
+                price: 893.6561706685311,
+                itemId: "3ab12c96-67a4-4b41-83ef-9abd8ae69f0b",
+                productId: "7343d3d0-fac4-46dc-af74-8e297e5c42f4"
             },
+
         },
             {
                 type: 'CartCreated',
                 data: {
-                    aggregateId: "2c202af2-7f65-4832-a0e2-1e34cc68105c"
+                    aggregateId: "f48d1072-1620-4395-a159-96a0d5035bc3"
                 },
+
             }])
             .when(command)
             .then([{

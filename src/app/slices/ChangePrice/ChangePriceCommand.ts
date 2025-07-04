@@ -10,9 +10,8 @@ export type ChangePriceCommand = Command<'ChangePrice', {
     productId: string,
 }>;
 
-export type ChangePriceState = {
-    prices?: Record<string, number>; // productId -> current price
-}
+// TODO-AI keep attributes in state optional
+export type ChangePriceState = {}
 
 export const ChangePriceInitialState = (): ChangePriceState => ({});
 
@@ -23,19 +22,30 @@ export const evolve = (
     const {type, data} = event;
 
     switch (type) {
-        case "PriceChanged":
-            return {
-                ...state,
-                prices: {
-                    ...state.prices,
-                    [data.productId]: data.newPrice
-                }
-            };
+        // case "..Event":
         default:
             return state;
     }
 };
 
+/*
+AI-TODO start: implement according to the specifications provided.
+
+in case an error is expected - throw an error
+
+Remove the TODO Comment afterwards.
+
+
+# Spec Start
+Title: spec:  change price
+### Given (Events): None
+### When (Command):
+  * Change Price
+### Then:
+  * Price Changed
+# Spec End
+AI-TODO end
+*/
 export const decide = (
     command: ChangePriceCommand,
     state: ChangePriceState,
@@ -47,8 +57,9 @@ export const decide = (
             oldPrice: command.data.oldPrice,
             productId: command.data.productId
         }
-    }];
+    }]
 };
+
 
 const ChangePriceCommandHandler = CommandHandler<ChangePriceState, CartEvents>({
     evolve,
@@ -58,4 +69,6 @@ const ChangePriceCommandHandler = CommandHandler<ChangePriceState, CartEvents>({
 export const handleChangePrice = async (id: string, command: ChangePriceCommand) => {
     const eventStore = await findEventstore()
     await ChangePriceCommandHandler(eventStore, id, (state: ChangePriceState) => decide(command, state))
+
 }
+

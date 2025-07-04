@@ -44,19 +44,6 @@ const evolve = (
     # Spec End
 
     # Spec Start
-    Title: spec:  cart items with changed inventory
-    Comments:
-      - Changed Inventories should not alter the cart
-    ### Given (Events):
-      * Inventory Changed
-      * Item Added
-      * Cart Created
-    ### When (Command): None
-    ### Then:
-      * cart items
-    # Spec End
-
-    # Spec Start
     Title: spec:  cart items with cleared cart
     Comments:
       - Read Model should display an empty list
@@ -88,10 +75,15 @@ const evolve = (
       - Should display one item in the cart
     ### Given (Events):
       * Item Added
+      Fields:
+     - price: 9.99
       * Cart Created
     ### When (Command): None
     ### Then:
       * cart items
+      Fields:
+     - price: 9.99
+     - totalPrice: 9.99
     # Spec End
         AI-TODO end
         */

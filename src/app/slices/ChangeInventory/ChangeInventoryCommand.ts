@@ -9,9 +9,8 @@ export type ChangeInventoryCommand = Command<'ChangeInventory', {
     productId: string,
 }>;
 
-export type ChangeInventoryState = {
-    inventory?: Record<string, number>; // productId -> inventory count
-}
+// TODO-AI keep attributes in state optional
+export type ChangeInventoryState = {}
 
 export const ChangeInventoryInitialState = (): ChangeInventoryState => ({});
 
@@ -22,19 +21,30 @@ export const evolve = (
     const {type, data} = event;
 
     switch (type) {
-        case "InventoryChanged":
-            return {
-                ...state,
-                inventory: {
-                    ...state.inventory,
-                    [data.productId]: data.inventory
-                }
-            };
+        // case "..Event":
         default:
             return state;
     }
 };
 
+/*
+AI-TODO start: implement according to the specifications provided.
+
+in case an error is expected - throw an error
+
+Remove the TODO Comment afterwards.
+
+
+# Spec Start
+Title: spec:  change inventory
+### Given (Events): None
+### When (Command):
+  * Change Inventory
+### Then:
+  * Inventory Changed
+# Spec End
+AI-TODO end
+*/
 export const decide = (
     command: ChangeInventoryCommand,
     state: ChangeInventoryState,
@@ -45,8 +55,9 @@ export const decide = (
             inventory: command.data.inventory,
             productId: command.data.productId
         }
-    }];
+    }]
 };
+
 
 const ChangeInventoryCommandHandler = CommandHandler<ChangeInventoryState, CartEvents>({
     evolve,
@@ -56,4 +67,6 @@ const ChangeInventoryCommandHandler = CommandHandler<ChangeInventoryState, CartE
 export const handleChangeInventory = async (id: string, command: ChangeInventoryCommand) => {
     const eventStore = await findEventstore()
     await ChangeInventoryCommandHandler(eventStore, id, (state: ChangeInventoryState) => decide(command, state))
+
 }
+

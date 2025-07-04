@@ -16,9 +16,9 @@ describe('PublishCart Specification', () => {
         const command: PublishCartCommand = {
             type: 'PublishCart',
             data: {
-                aggregateId: "a96204f9-196f-4c28-b417-3ecdf79d7a1a",
-                orderedProducts: "productId, price",
-                totalPrice: 222.2120656175678
+                aggregateId: "fff124b1-7566-4a26-b088-6773f3b376fd",
+                orderedProducts: null // todo: handle complex type,
+                totalPrice: 991.5550114952831
             },
             metadata: {now: new Date()},
         }
@@ -26,33 +26,37 @@ describe('PublishCart Specification', () => {
         given([{
             type: 'CartPublished',
             data: {
-                aggregateId: "60c1eabc-701d-4834-abad-0a571463cc5c"
+                aggregateId: "ba823029-fa8b-455d-96a4-6edd78176660"
             },
+
         },
             {
                 type: 'CartSubmitted',
                 data: {
-                    aggregateId: "ebf51f26-be7d-4803-9e43-9a5dfea53cdf",
-                    orderedProducts: "productId, price",
-                    totalPrice: 534.9482984792326
+                    aggregateId: "f06fb3ea-b4a3-4698-8988-db3bd2e9d2c3",
+                    orderedProducts: null // todo: handle complex type,
+                    totalPrice: 212.58408053804322
                 },
+
             },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "825a1672-be7b-4dd7-8a0e-00673ae18326",
-                    description: "8a12b3a4-f29c-4fbf-8a5a-b9886ce286ea",
-                    image: "21a0ae71-0789-454f-8286-9385ed12a1a7",
-                    price: 997.8100431046518,
-                    itemId: "20a8e3f1-7bbf-4d9b-af0d-0c3add027b30",
-                    productId: "5022f50c-6264-4123-9960-a70cffd98c5d"
+                    aggregateId: "e32d61aa-46bd-43ea-b388-0a375d4a3833",
+                    description: "c47a2af5-cf4b-43e7-bb6f-168ee1ef2840",
+                    image: "95ef296d-fe8d-47c6-b14e-3ba5997868e9",
+                    price: 252.37173361244425,
+                    itemId: "16951a16-c743-4187-9922-7fcddf0b7803",
+                    productId: "77e921b3-2991-4146-90b3-bc7ba81a5c1e"
                 },
+
             },
             {
                 type: 'CartCreated',
                 data: {
-                    aggregateId: "4df1ce9b-c7da-45b8-821d-5151516076c1"
+                    aggregateId: "6e6d65e6-aeb1-4fc6-a7aa-1e058cb93ffc"
                 },
+
             }])
             .when(command)
             .then([{

@@ -16,7 +16,7 @@ describe('ClearCart Specification', () => {
         const command: ClearCartCommand = {
             type: 'ClearCart',
             data: {
-                aggregateId: "559365a8-bbc6-48ab-b290-df0cd11f97d4"
+                aggregateId: "54918d2b-0baa-428c-be52-1c2c1f611465"
             },
             metadata: {now: new Date()},
         }
@@ -24,19 +24,21 @@ describe('ClearCart Specification', () => {
         given([{
             type: 'ItemAdded',
             data: {
-                aggregateId: "1b4c21f3-5a81-4291-bdb6-4d91ac5bf8d7",
-                description: "88b19f7d-bffb-4245-bfc4-b76b1fd85ca5",
-                image: "b2e699bf-30c7-4eda-b1bf-303f4bf5b1d7",
-                price: 839.5373943526947,
-                itemId: "9e7037d9-f3da-4b94-b9a4-937647f4233f",
-                productId: "48fe30bd-ac42-4714-9e4e-1a8e4d79381e"
+                aggregateId: "33a9a108-6d68-4b8b-916b-9e57784d2340",
+                description: "374316b1-69c3-410c-81f1-30cb327ee4b5",
+                image: "3abf0b69-aabc-4804-bd3a-75f4b1dca2d3",
+                price: 679.7721995849628,
+                itemId: "2add7110-719e-4cf8-aa1c-6cb50e768dc9",
+                productId: "bf169e46-bf88-44ff-a611-e71be78570d6"
             },
+
         },
             {
                 type: 'CartCreated',
                 data: {
-                    aggregateId: "b46f3f0d-638e-453c-ab6c-5207ef0b6125"
+                    aggregateId: "bb8bc94b-e4e1-45b0-af7b-407427508977"
                 },
+
             }])
             .when(command)
             .then([{

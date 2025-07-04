@@ -9,11 +9,8 @@ export type RemoveItemCommand = Command<'RemoveItem', {
     itemId: string,
 }>;
 
-export type RemoveItemState = {
-    cartExists?: boolean;
-    addedItems?: Set<string>; // itemIds that have been added
-    removedItems?: Set<string>; // itemIds that have been removed
-}
+// TODO-AI keep attributes in state optional
+export type RemoveItemState = {}
 
 export const RemoveItemInitialState = (): RemoveItemState => ({});
 
@@ -24,54 +21,57 @@ export const evolve = (
     const {type, data} = event;
 
     switch (type) {
-        case "CartCreated":
-            return {
-                ...state,
-                cartExists: true
-            };
-
-        case "ItemAdded":
-            return {
-                ...state,
-                addedItems: new Set([...(state.addedItems || []), data.itemId])
-            };
-
-        case "ItemRemoved":
-            return {
-                ...state,
-                removedItems: new Set([...(state.removedItems || []), data.itemId])
-            };
-
+        // case "..Event":
         default:
             return state;
     }
 };
 
+/*
+AI-TODO start: implement according to the specifications provided.
+
+in case an error is expected - throw an error
+
+Remove the TODO Comment afterwards.
+
+
+# Spec Start
+Title: spec:  remove item which was already removed
+### Given (Events):
+  * Item Removed
+  * Item Added
+  * Cart Created
+### When (Command):
+  * Remove Item
+### Then:
+  * Error-Case
+# Spec End
+
+# Spec Start
+Title: spec:  remove item
+### Given (Events):
+  * Item Added
+  * Cart Created
+### When (Command):
+  * Remove Item
+### Then:
+  * Item Removed
+# Spec End
+AI-TODO end
+*/
 export const decide = (
     command: RemoveItemCommand,
     state: RemoveItemState,
 ): CartEvents[] => {
-    const { itemId } = command.data;
-
-    // Check if item was already removed
-    if (state.removedItems?.has(itemId)) {
-        throw new Error(`Item ${itemId} has already been removed`);
-    }
-
-    // Check if item was actually added to the cart
-    if (!state.addedItems?.has(itemId)) {
-        throw new Error(`Item ${itemId} was never added to the cart`);
-    }
-
-    // Item exists and hasn't been removed - proceed with removal
     return [{
         type: "ItemRemoved",
         data: {
             aggregateId: command.data.aggregateId,
             itemId: command.data.itemId
         }
-    }];
+    }]
 };
+
 
 const RemoveItemCommandHandler = CommandHandler<RemoveItemState, CartEvents>({
     evolve,
@@ -81,4 +81,6 @@ const RemoveItemCommandHandler = CommandHandler<RemoveItemState, CartEvents>({
 export const handleRemoveItem = async (id: string, command: RemoveItemCommand) => {
     const eventStore = await findEventstore()
     await RemoveItemCommandHandler(eventStore, id, (state: RemoveItemState) => decide(command, state))
+
 }
+
