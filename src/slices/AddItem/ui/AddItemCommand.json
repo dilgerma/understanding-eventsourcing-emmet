@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Add Item",
+  "description": "",
+  "properties": {
+    "aggregateId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "description": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "itemId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "productId": {
+      "type": "string"
+    }
+  }
+}

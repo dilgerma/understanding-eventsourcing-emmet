@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Remove Item",
+  "description": "",
+  "properties": {
+    "aggregateId": {
+      "type": "string"
+    },
+    "itemId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "productId": {
+      "type": "string",
+      "format": "uuid"
+    }
+  }
+}
