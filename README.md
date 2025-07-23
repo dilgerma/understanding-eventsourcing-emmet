@@ -29,9 +29,9 @@ The original Github Repository ( Spring + Kotlin + Axon ) including all source c
 
 The sample application is written in ExpressJS, Node, NextJS and Emmet and Supabase
 
-[Kotlin](https://kotlinlang.org/)
-[Spring](https://spring.io/projects/spring-framework)
-[Axon](https://www.axoniq.io/products/axon-framework)
+[NextJS](https://nextjs.org/)
+[ExpressJS](https://expressjs.com/)
+[Supabase](https://supabase.com/)
 [Emmet](https://event-driven-io.github.io/emmett/getting-started.html)
 
 You need to have Docker installed.
