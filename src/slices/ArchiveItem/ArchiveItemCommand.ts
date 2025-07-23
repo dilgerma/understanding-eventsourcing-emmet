@@ -4,23 +4,21 @@ import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type ArchiveItemCommand = Command<'ArchiveItem', {
-          aggregateId: string,
-  itemId: string,
-  productId: string,
-        }>;
+    aggregateId: string,
+    itemId: string,
+    productId: string,
+}>;
 
 // TODO-AI keep attributes in state optional
-export type ArchiveItemState = {
-}
+export type ArchiveItemState = {}
 
-export const ArchiveItemInitialState = (): ArchiveItemState => ({
-});
+export const ArchiveItemInitialState = (): ArchiveItemState => ({});
 
 export const evolve = (
     state: ArchiveItemState,
     event: CartEvents,
 ): ArchiveItemState => {
-    const { type, data } = event;
+    const {type, data} = event;
 
     switch (type) {
         // case "..Event":
@@ -68,25 +66,29 @@ Fields:
 # Spec End
 AI-TODO end
 */
-    export const decide = (
+export const decide = (
     command: ArchiveItemCommand,
     state: ArchiveItemState,
 ): CartEvents[] => {
     return [{
         type: "ItemArchived",
-            data: {
-        			aggregateId:command.data.aggregateId,
-			productId:command.data.productId,
-			itemId:command.data.itemId
-    }}]
+        data: {
+            aggregateId: command.data.aggregateId,
+            productId: command.data.productId,
+            itemId: command.data.itemId
+        }
+    }]
 };
 
 
-const ArchiveItemCommandHandler = CommandHandler<ArchiveItemState, CartEvents>({evolve,initialState:ArchiveItemInitialState});
+const ArchiveItemCommandHandler = CommandHandler<ArchiveItemState, CartEvents>({
+    evolve,
+    initialState: ArchiveItemInitialState
+});
 
-export const handleArchiveItem = async (id:string,command:ArchiveItemCommand) => {
+export const handleArchiveItem = async (id: string, command: ArchiveItemCommand) => {
     const eventStore = await findEventstore()
-    await ArchiveItemCommandHandler(eventStore, id, (state:ArchiveItemState)=>decide(command,state))
+    await ArchiveItemCommandHandler(eventStore, id, (state: ArchiveItemState) => decide(command, state))
 
 }
 

@@ -4,8 +4,9 @@ import {GetServerSidePropsContext} from "next";
 
 
 export default function CartView(props: any) {
-        return <ScreenComponent/>
+    return <ScreenComponent/>
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext):Promise<any> => {
-    return commonGetServerSideProps(context)}
+export const getServerSideProps = async (context: GetServerSidePropsContext): Promise<any> => {
+    return commonGetServerSideProps(context)
+}

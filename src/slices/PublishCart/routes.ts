@@ -5,13 +5,13 @@ import {WebApiSetup} from "@event-driven-io/emmett-expressjs";
 import {assertNotEmpty} from "../../components/util/assertions";
 
 export type PublishCartRequestPayload = {
-    aggregateId?:string,
-orderedProducts?:Array<any>,
-totalPrice?:number
+    aggregateId?: string,
+    orderedProducts?: Array<any>,
+    totalPrice?: number
 }
 
 export type PublishCartRequest = Request<
-    Partial<{ id:string }>,
+    Partial<{ id: string }>,
     unknown,
     Partial<PublishCartRequestPayload>
 >;
@@ -28,20 +28,20 @@ export const api =
                 }
 
                 try {
-                    const command:PublishCartCommand = {
+                    const command: PublishCartCommand = {
                         data: {
-                            			aggregateId:assertNotEmpty(req.body.aggregateId),
-			orderedProducts:assertNotEmpty(req.body.orderedProducts),
-			totalPrice:assertNotEmpty(req.body.totalPrice)
+                            aggregateId: assertNotEmpty(req.body.aggregateId),
+                            orderedProducts: assertNotEmpty(req.body.orderedProducts),
+                            totalPrice: assertNotEmpty(req.body.totalPrice)
                             //amount: req.body.amount,
                         },
                         type: "PublishCart"
                     }
                     await handlePublishCart(assertNotEmpty(req.params.id), command);
-                    return res.status(200).json({ ok: true });
+                    return res.status(200).json({ok: true});
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ ok: false, error: 'Server error' });
+                    return res.status(500).json({ok: false, error: 'Server error'});
                 }
             });
         };

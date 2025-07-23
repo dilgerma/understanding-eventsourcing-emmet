@@ -17,9 +17,9 @@ export const processor = {
             const command: ArchiveItemCommand = {
                 type: "ArchiveItem",
                 data: {
-                   			aggregateId:item.data.aggregateId!,
-			itemId:item.data.itemId!,
-			productId:item.data.productId!
+                    aggregateId: item.data.aggregateId!,
+                    itemId: item.data.itemId!,
+                    productId: item.data.productId!
                 }
             }
             await handleArchiveItem(command.data[idAttribute], command)

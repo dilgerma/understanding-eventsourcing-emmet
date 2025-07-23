@@ -4,23 +4,21 @@ import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type PublishCartCommand = Command<'PublishCart', {
-          aggregateId: string,
-  orderedProducts: Array<any>,
-  totalPrice: number,
-        }>;
+    aggregateId: string,
+    orderedProducts: Array<any>,
+    totalPrice: number,
+}>;
 
 // TODO-AI keep attributes in state optional
-export type PublishCartState = {
-}
+export type PublishCartState = {}
 
-export const PublishCartInitialState = (): PublishCartState => ({
-});
+export const PublishCartInitialState = (): PublishCartState => ({});
 
 export const evolve = (
     state: PublishCartState,
     event: CartEvents,
 ): PublishCartState => {
-    const { type, data } = event;
+    const {type, data} = event;
 
     switch (type) {
         // case "..Event":
@@ -40,25 +38,29 @@ Remove the TODO Comment afterwards.
 
 AI-TODO end
 */
-    export const decide = (
+export const decide = (
     command: PublishCartCommand,
     state: PublishCartState,
 ): CartEvents[] => {
     return [{
         type: "CartPublished",
-            data: {
-        			aggregateId:command.data.aggregateId,
-			orderedProducts:command.data.orderedProducts,
-			totalPrice:command.data.totalPrice
-    }}]
+        data: {
+            aggregateId: command.data.aggregateId,
+            orderedProducts: command.data.orderedProducts,
+            totalPrice: command.data.totalPrice
+        }
+    }]
 };
 
 
-const PublishCartCommandHandler = CommandHandler<PublishCartState, CartEvents>({evolve,initialState:PublishCartInitialState});
+const PublishCartCommandHandler = CommandHandler<PublishCartState, CartEvents>({
+    evolve,
+    initialState: PublishCartInitialState
+});
 
-export const handlePublishCart = async (id:string,command:PublishCartCommand) => {
+export const handlePublishCart = async (id: string, command: PublishCartCommand) => {
     const eventStore = await findEventstore()
-    await PublishCartCommandHandler(eventStore, id, (state:PublishCartState)=>decide(command,state))
+    await PublishCartCommandHandler(eventStore, id, (state: PublishCartState) => decide(command, state))
 
 }
 

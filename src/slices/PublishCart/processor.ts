@@ -17,9 +17,9 @@ export const processor = {
             const command: PublishCartCommand = {
                 type: "PublishCart",
                 data: {
-                   			aggregateId:item.data.aggregateId!,
-			orderedProducts:item.data.orderedProducts!,
-			totalPrice:item.data.totalPrice!
+                    aggregateId: item.data.aggregateId!,
+                    orderedProducts: item.data.orderedProducts!,
+                    totalPrice: item.data.totalPrice!
                 }
             }
             await handlePublishCart(command.data[idAttribute], command)

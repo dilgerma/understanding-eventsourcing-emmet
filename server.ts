@@ -34,8 +34,8 @@ app.prepare().then(async () => {
         }
     }
 
-    for(const processorFile of processorFiles) {
-        const processor: { processor: {start: () => {}} } = await import(processorFile);
+    for (const processorFile of processorFiles) {
+        const processor: { processor: { start: () => {} } } = await import(processorFile);
         if (typeof processor.processor.start == "function") {
             console.log(`starting processor ${processorFile}`)
             processor.processor.start()

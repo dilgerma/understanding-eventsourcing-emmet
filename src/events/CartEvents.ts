@@ -8,4 +8,18 @@ import {InventoryUpdated} from './InventoryUpdated';
 import {CartPublished} from './CartPublished';
 import {CartSubmitted} from './CartSubmitted';
 
-export type CartEvents = ItemAdded | CartCleared | ItemRemoved | ItemAdded | ItemRemoved | PriceChanged | ItemArchiveRequested | PriceChanged | ItemArchived | InventoryUpdated | CartPublished | InventoryUpdated | CartSubmitted | CartCleared;
+export type CartEvents =
+    ItemAdded
+    | CartCleared
+    | ItemRemoved
+    | ItemAdded
+    | ItemRemoved
+    | PriceChanged
+    | ItemArchiveRequested
+    | PriceChanged
+    | ItemArchived
+    | InventoryUpdated
+    | CartPublished
+    | InventoryUpdated
+    | CartSubmitted
+    | CartCleared;

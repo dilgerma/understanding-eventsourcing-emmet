@@ -12,8 +12,10 @@ export const ItemsToBeArchivedReadModelStateView = () => {
 
         <h3>ItemsToBeArchivedReadModel StateView</h3>
         {showFilter ? <div className="controls">
-            <input onChange={(evt)=>{setId(evt.target.value)}} type="text" placeholder="Id" className="input"/>
-        </div> : <span/> }
+            <input onChange={(evt) => {
+                setId(evt.target.value)
+            }} type="text" placeholder="Id" className="input"/>
+        </div> : <span/>}
         <div className={"top-margin"}/>
 
         <div>

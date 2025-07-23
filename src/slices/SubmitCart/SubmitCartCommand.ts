@@ -4,21 +4,19 @@ import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type SubmitCartCommand = Command<'SubmitCart', {
-          aggregateId: string,
-        }>;
+    aggregateId: string,
+}>;
 
 // TODO-AI keep attributes in state optional
-export type SubmitCartState = {
-}
+export type SubmitCartState = {}
 
-export const SubmitCartInitialState = (): SubmitCartState => ({
-});
+export const SubmitCartInitialState = (): SubmitCartState => ({});
 
 export const evolve = (
     state: SubmitCartState,
     event: CartEvents,
 ): SubmitCartState => {
-    const { type, data } = event;
+    const {type, data} = event;
 
     switch (type) {
         // case "..Event":
@@ -60,23 +58,27 @@ Fields:
 # Spec End
 AI-TODO end
 */
-    export const decide = (
+export const decide = (
     command: SubmitCartCommand,
     state: SubmitCartState,
 ): CartEvents[] => {
     return [{
         type: "CartSubmitted",
-            data: {
-        			aggregateId:command.data.aggregateId
-    }}]
+        data: {
+            aggregateId: command.data.aggregateId
+        }
+    }]
 };
 
 
-const SubmitCartCommandHandler = CommandHandler<SubmitCartState, CartEvents>({evolve,initialState:SubmitCartInitialState});
+const SubmitCartCommandHandler = CommandHandler<SubmitCartState, CartEvents>({
+    evolve,
+    initialState: SubmitCartInitialState
+});
 
-export const handleSubmitCart = async (id:string,command:SubmitCartCommand) => {
+export const handleSubmitCart = async (id: string, command: SubmitCartCommand) => {
     const eventStore = await findEventstore()
-    await SubmitCartCommandHandler(eventStore, id, (state:SubmitCartState)=>decide(command,state))
+    await SubmitCartCommandHandler(eventStore, id, (state: SubmitCartState) => decide(command, state))
 
 }
 

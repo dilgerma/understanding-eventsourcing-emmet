@@ -4,8 +4,9 @@ import {GetServerSidePropsContext} from "next";
 
 
 export default function ProductView(props: any) {
-        return <TitleComponent/>
+    return <TitleComponent/>
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext):Promise<any> => {
-    return commonGetServerSideProps(context)}
+export const getServerSideProps = async (context: GetServerSidePropsContext): Promise<any> => {
+    return commonGetServerSideProps(context)
+}

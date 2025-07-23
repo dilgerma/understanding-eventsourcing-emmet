@@ -4,21 +4,19 @@ import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type ClearCartCommand = Command<'ClearCart', {
-          aggregateId: string,
-        }>;
+    aggregateId: string,
+}>;
 
 // TODO-AI keep attributes in state optional
-export type ClearCartState = {
-}
+export type ClearCartState = {}
 
-export const ClearCartInitialState = (): ClearCartState => ({
-});
+export const ClearCartInitialState = (): ClearCartState => ({});
 
 export const evolve = (
     state: ClearCartState,
     event: CartEvents,
 ): ClearCartState => {
-    const { type, data } = event;
+    const {type, data} = event;
 
     switch (type) {
         // case "..Event":
@@ -58,23 +56,27 @@ Fields:
 # Spec End
 AI-TODO end
 */
-    export const decide = (
+export const decide = (
     command: ClearCartCommand,
     state: ClearCartState,
 ): CartEvents[] => {
     return [{
         type: "CartCleared",
-            data: {
-        			aggregateId:command.data.aggregateId
-    }}]
+        data: {
+            aggregateId: command.data.aggregateId
+        }
+    }]
 };
 
 
-const ClearCartCommandHandler = CommandHandler<ClearCartState, CartEvents>({evolve,initialState:ClearCartInitialState});
+const ClearCartCommandHandler = CommandHandler<ClearCartState, CartEvents>({
+    evolve,
+    initialState: ClearCartInitialState
+});
 
-export const handleClearCart = async (id:string,command:ClearCartCommand) => {
+export const handleClearCart = async (id: string, command: ClearCartCommand) => {
     const eventStore = await findEventstore()
-    await ClearCartCommandHandler(eventStore, id, (state:ClearCartState)=>decide(command,state))
+    await ClearCartCommandHandler(eventStore, id, (state: ClearCartState) => decide(command, state))
 
 }
 

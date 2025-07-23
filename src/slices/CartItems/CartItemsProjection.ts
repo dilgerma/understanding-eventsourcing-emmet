@@ -18,9 +18,9 @@ export type CartItemsReadModel = {
 
 const evolve = (
     document: CartItemsReadModel | null,
-    { type, data: event }: ItemArchived | CartCleared | ItemRemoved | ItemAdded
+    {type, data: event}: ItemArchived | CartCleared | ItemRemoved | ItemAdded
 ): CartItemsReadModel | null => {
-    const state: CartItemsReadModel = { ...document, data: [...(document?.data ?? [])] };
+    const state: CartItemsReadModel = {...document, data: [...(document?.data ?? [])]};
 
     switch (type) {
         case "ItemAdded": {
@@ -43,26 +43,26 @@ const evolve = (
                     productId: event.productId
                 });
             }
-            return { ...state };
+            return {...state};
         }
 
         case "ItemRemoved": {
             state.data = state.data.filter(item => item.itemId !== event.itemId);
-            return { ...state };
+            return {...state};
         }
 
         case "ItemArchived": {
             state.data = state.data.filter(item => item.itemId !== event.itemId);
-            return { ...state };
+            return {...state};
         }
 
         case "CartCleared": {
             state.data = [];
-            return { ...state };
+            return {...state};
         }
 
         default:
-            return { ...state };
+            return {...state};
     }
 };
 

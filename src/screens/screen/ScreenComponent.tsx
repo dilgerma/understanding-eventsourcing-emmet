@@ -9,31 +9,31 @@ export default function ScreenComponent(props: any) {
 
     const [view, setView] = useState<string>()
 
-                    return (
+    return (
 
-            <div className="content container">
-                <Navigation/>
-                <img className="banner" src={"/assets/banner.png"}/>
+        <div className="content container">
+            <Navigation/>
+            <img className="banner" src={"/assets/banner.png"}/>
 
-                <main>
-                    <div className="grid">
-                        
-                        <div className={"cell command"}
-                             onClick={() => setView("additem")}>
-                            <h3>AddItem</h3>
-                            <div>
-                                COMMAND
-                            </div>
+            <main>
+                <div className="grid">
+
+                    <div className={"cell command"}
+                         onClick={() => setView("additem")}>
+                        <h3>AddItem</h3>
+                        <div>
+                            COMMAND
                         </div>
-                   </div>
+                    </div>
+                </div>
 
-                 {/* main */}
-                  <div className={"top-margin"}/>
+                {/* main */}
+                <div className={"top-margin"}/>
 
-                   {view == "additem" ? <AddItemCommandComponent/> : <span/>}
+                {view == "additem" ? <AddItemCommandComponent/> : <span/>}
 
-                </main>
-            </div>
+            </main>
+        </div>
 
     );
 }

@@ -14,7 +14,8 @@ If you want to quickly learn about Eventmodeling, here is the original article:
 
 [The original Eventmodeling Article](https://eventmodeling.org/posts/what-is-event-modeling/)
 
-By subscribing to the newsletter you´ll get access to the "little" Eventmodeling Handbook, which can serve as a quick reference in addition to the book.
+By subscribing to the newsletter you´ll get access to the "little" Eventmodeling Handbook, which can serve as a quick
+reference in addition to the book.
 
 [The Little Eventmodeling Book](https://newsletter.nebulit.de/)
 
@@ -71,11 +72,12 @@ Access the app at http://localhost:3000/
 
 All pages except "/" require authentication.
 
-
 ### Code Generation
 
-The source code in the book was mostly generated directly from the Event Model. If you want to see this process in action, I can highly
-recommend this E-Mail Course that spans 8 days currently and guides you through the process of creating your own custom Code Generator.
+The source code in the book was mostly generated directly from the Event Model. If you want to see this process in
+action, I can highly
+recommend this E-Mail Course that spans 8 days currently and guides you through the process of creating your own custom
+Code Generator.
 
 [E-Mail Course](https://newsletter.nebulit.de/generator)
 

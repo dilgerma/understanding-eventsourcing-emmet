@@ -19,7 +19,7 @@ export const api =
                     const db = client.db();
                     const collection = db.collection<CartItemsReadModel>('cartitems-collection');
 
-                    const projection = await collection.findOne({ _id: id });
+                    const projection = await collection.findOne({_id: id});
 
                     // Serialize, handling bigint properly
                     const sanitized = JSON.parse(
@@ -31,7 +31,7 @@ export const api =
                     return res.status(200).json(sanitized);
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ ok: false, error: 'Server error' });
+                    return res.status(500).json({ok: false, error: 'Server error'});
                 }
             });
 

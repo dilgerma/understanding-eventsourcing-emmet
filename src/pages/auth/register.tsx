@@ -31,7 +31,7 @@ export default function RegisterPage() {
                             <div className="box">
                                 <h1 className="title has-text-centered">Create Account</h1>
                                 <p className="subtitle has-text-centered">Register with your email address</p>
-                                
+
                                 {errorMsg && (
                                     <div className="notification is-danger is-light">
                                         <button className="delete" onClick={() => setErrorMsg(null)}></button>
@@ -69,8 +69,8 @@ export default function RegisterPage() {
 
                                     <div className="field">
                                         <div className="control">
-                                            <button 
-                                                type="submit" 
+                                            <button
+                                                type="submit"
                                                 className={`button is-primary is-fullwidth ${loading ? 'is-loading' : ''}`}
                                                 disabled={loading || !email}
                                             >
@@ -80,7 +80,8 @@ export default function RegisterPage() {
                                     </div>
 
                                     <div className="has-text-centered">
-                                        <p className="is-size-7">Already have an account? <a href="/auth/login">Sign in</a></p>
+                                        <p className="is-size-7">Already have an account? <a href="/auth/login">Sign
+                                            in</a></p>
                                     </div>
                                 </form>
                             </div>

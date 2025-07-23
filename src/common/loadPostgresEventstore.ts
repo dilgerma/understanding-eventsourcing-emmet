@@ -14,12 +14,12 @@ export const findEventstore = async () => {
     return getPostgreSQLEventStore(postgresUrl, {
         projections: projections.inline([
             CartItemsProjection,
-ProductsWithPriceChangesProjection,
-CartsWithProductsProjection,
-ItemsToBeArchivedProjection,
-InventoriesProjection,
-CartsToBePublishedProjection
+            ProductsWithPriceChangesProjection,
+            CartsWithProductsProjection,
+            ItemsToBeArchivedProjection,
+            InventoriesProjection,
+            CartsToBePublishedProjection
         ]),
-});
+    });
 
 }

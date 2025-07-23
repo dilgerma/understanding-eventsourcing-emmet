@@ -45,7 +45,7 @@ export default function LoginPage() {
                             <div className="box">
                                 <h1 className="title has-text-centered">Welcome Back</h1>
                                 <p className="subtitle has-text-centered">Sign in to your account</p>
-                                
+
                                 {error && (
                                     <div className="notification is-danger is-light">
                                         <button className="delete" onClick={() => setError(null)}></button>
@@ -57,12 +57,12 @@ export default function LoginPage() {
                                     <div className="field">
                                         <label className="label" htmlFor="email">Email</label>
                                         <div className="control has-icons-left">
-                                            <input 
-                                                className="input" 
-                                                id="email" 
-                                                type="email" 
+                                            <input
+                                                className="input"
+                                                id="email"
+                                                type="email"
                                                 placeholder="Enter your email"
-                                                value={email} 
+                                                value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 disabled={loading}
                                             />
@@ -92,8 +92,8 @@ export default function LoginPage() {
 
                                     <div className="field is-grouped">
                                         <div className="control is-expanded">
-                                            <button 
-                                                type="button" 
+                                            <button
+                                                type="button"
                                                 className={`button is-primary is-fullwidth ${loading ? 'is-loading' : ''}`}
                                                 onClick={logIn}
                                                 disabled={loading || !email || !password}
@@ -105,8 +105,8 @@ export default function LoginPage() {
 
                                     <div className="field">
                                         <div className="control">
-                                            <button 
-                                                type="button" 
+                                            <button
+                                                type="button"
                                                 className={`button is-light is-fullwidth ${loading ? 'is-loading' : ''}`}
                                                 onClick={signUp}
                                                 disabled={loading || !email || !password}
