@@ -12,10 +12,13 @@ export type AddItemCommand = Command<'AddItem', {
     productId: string,
 }>;
 
-// TODO-AI keep attributes in state optional
-export type AddItemState = {}
+export type AddItemState = {
+    itemCount?: number;
+}
 
-export const AddItemInitialState = (): AddItemState => ({});
+export const AddItemInitialState = (): AddItemState => ({
+    itemCount: 0
+});
 
 export const evolve = (
     state: AddItemState,
@@ -24,91 +27,34 @@ export const evolve = (
     const {type, data} = event;
 
     switch (type) {
-        // case "..Event":
+        case "ItemAdded":
+            return {
+                ...state,
+                itemCount: (state.itemCount ?? 0) + 1
+            };
+        case "ItemRemoved":
+            return {
+                ...state,
+                itemCount: Math.max(0, (state.itemCount ?? 0) - 1)
+            };
+        case "CartCleared":
+            return {
+                ...state,
+                itemCount: 0
+            };
         default:
             return state;
     }
 };
 
-/*
-AI-TODO start: implement according to the specifications provided.
-Stick to the specification, don´t add new fields, which are not specified.
-
-in case an error is expected - throw an error
-
-Remove the TODO Comment afterwards.
-
-
-# Spec Start
-Title: spec: At most 3 Items
-Comments:
-  - can only add 3 items to the cart
-### Given (Events):
-  * 'Item Added' (SPEC_EVENT)
-Fields:
- - aggregateId: 
- - description: 
- - itemId: 
- - name: 
- - price: 
- - productId: 
-  * 'Item Added' (SPEC_EVENT)
-Fields:
- - aggregateId: 
- - description: 
- - itemId: 
- - name: 
- - price: 
- - productId: 
-  * 'Item Added' (SPEC_EVENT)
-Fields:
- - aggregateId: 
- - description: 
- - itemId: 
- - name: 
- - price: 
- - productId: 
-### When (Command):
-  * 'Add Item' (SPEC_COMMAND)
-Fields:
- - aggregateId: 
- - description: 
- - price: 
- - itemId: 
- - name: 
- - productId: 
-### Then:
-  * 'Error-Case' (SPEC_ERROR)
-# Spec End
-
-# Spec Start
-Title: spec: Add Item
-### Given (Events): None
-### When (Command):
-  * 'Add Item' (SPEC_COMMAND)
-Fields:
- - aggregateId: 
- - description: 
- - price: 
- - itemId: 
- - name: 
- - productId: 
-### Then:
-  * 'Item Added' (SPEC_EVENT)
-Fields:
- - aggregateId: 
- - description: 
- - itemId: 
- - name: 
- - price: 
- - productId: 
-# Spec End
-AI-TODO end
-*/
 export const decide = (
     command: AddItemCommand,
     state: AddItemState,
 ): CartEvents[] => {
+    if ((state.itemCount ?? 0) >= 3) {
+        throw new Error("Cannot add more than 3 items to the cart");
+    }
+    
     return [{
         type: "ItemAdded",
         data: {

@@ -1,6 +1,6 @@
 import {before, describe, it} from "node:test";
 import {expectPongoDocuments, PostgreSQLProjectionSpec} from "@event-driven-io/emmett-postgresql";
-import {CartItemsProjection, CartItemsReadModel} from "@/app/slices/CartItems/CartItemsProjection";
+import {CartItemsProjection, CartItemsReadModel} from "./CartItemsProjection";
 import {PostgreSqlContainer, StartedPostgreSqlContainer} from "@testcontainers/postgresql";
 import {ItemArchived} from "../../events/ItemArchived"
 import {CartCleared} from "../../events/CartCleared"

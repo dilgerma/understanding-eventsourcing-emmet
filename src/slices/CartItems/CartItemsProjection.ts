@@ -66,7 +66,7 @@ const evolve = (
     }
 };
 
-const collectionName = 'cartitems-collection';
+const collectionName = 'CartItems-collection';
 
 export const CartItemsProjection = pongoSingleStreamProjection({
     canHandle: ["ItemArchived", "CartCleared", "ItemRemoved", "ItemAdded"],

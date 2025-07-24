@@ -9,10 +9,13 @@ export type RemoveItemCommand = Command<'RemoveItem', {
     productId: string,
 }>;
 
-// TODO-AI keep attributes in state optional
-export type RemoveItemState = {}
+export type RemoveItemState = {
+    items?: string[];
+}
 
-export const RemoveItemInitialState = (): RemoveItemState => ({});
+export const RemoveItemInitialState = (): RemoveItemState => ({
+    items: []
+});
 
 export const evolve = (
     state: RemoveItemState,
@@ -21,39 +24,36 @@ export const evolve = (
     const {type, data} = event;
 
     switch (type) {
-        // case "..Event":
+        case "ItemAdded":
+            return {
+                ...state,
+                items: [...(state.items ?? []), data.itemId]
+            };
+        case "ItemRemoved":
+            return {
+                ...state,
+                items: (state.items ?? []).filter(itemId => itemId !== data.itemId)
+            };
+        case "CartCleared":
+            return {
+                ...state,
+                items: []
+            };
         default:
             return state;
     }
 };
 
-/*
-AI-TODO start: implement according to the specifications provided.
-Stick to the specification, don´t add new fields, which are not specified.
-
-in case an error is expected - throw an error
-
-Remove the TODO Comment afterwards.
-
-
-# Spec Start
-Title: spec: Item removed
-### Given (Events): None
-### When (Command):
-  * 'Remove Item' (SPEC_COMMAND)
-Fields:
- - aggregateId: 
- - itemId: 
- - productId: 
-### Then:
-  * 'Error-Case' (SPEC_ERROR)
-# Spec End
-AI-TODO end
-*/
 export const decide = (
     command: RemoveItemCommand,
     state: RemoveItemState,
 ): CartEvents[] => {
+    const items = state.items ?? [];
+    
+    if (!items.includes(command.data.itemId)) {
+        throw new Error("Cannot remove item that doesn't exist in cart");
+    }
+    
     return [{
         type: "ItemRemoved",
         data: {
