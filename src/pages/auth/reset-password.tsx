@@ -30,9 +30,8 @@ export default function ResetPasswordPage() {
                         <div className="column is-4-desktop is-6-tablet">
                             <div className="box">
                                 <h1 className="title has-text-centered">Reset Password</h1>
-                                <p className="subtitle has-text-centered">Enter your email to receive reset
-                                    instructions</p>
-
+                                <p className="subtitle has-text-centered">Enter your email to receive reset instructions</p>
+                                
                                 {errorMsg && (
                                     <div className="notification is-danger is-light">
                                         <button className="delete" onClick={() => setErrorMsg(null)}></button>
@@ -70,8 +69,8 @@ export default function ResetPasswordPage() {
 
                                     <div className="field">
                                         <div className="control">
-                                            <button
-                                                type="submit"
+                                            <button 
+                                                type="submit" 
                                                 className={`button is-primary is-fullwidth ${loading ? 'is-loading' : ''}`}
                                                 disabled={loading || !email}
                                             >
@@ -81,8 +80,7 @@ export default function ResetPasswordPage() {
                                     </div>
 
                                     <div className="has-text-centered">
-                                        <p className="is-size-7">Remember your password? <a href="/auth/login">Sign
-                                            in</a></p>
+                                        <p className="is-size-7">Remember your password? <a href="/auth/login">Sign in</a></p>
                                     </div>
                                 </form>
                             </div>

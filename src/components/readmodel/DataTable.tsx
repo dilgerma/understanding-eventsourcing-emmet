@@ -31,7 +31,7 @@ const DataTable = (props: { endpoint: string, queries: Record<string, string> })
                         return
                     }
                     setArraySelection(Array.isArray(data.data) || Array.isArray(data))
-                    if (Array.isArray(data) && !data[0])
+                    if(Array.isArray(data) && !data[0])
                         return
                     if (Array.isArray(data.data) && !data.data[0])
                         return
@@ -83,9 +83,8 @@ const DataTable = (props: { endpoint: string, queries: Record<string, string> })
                     <option key={index} value={index}>{`Item ${index + 1}`}</option>
                 ))}
             </select> : <span/>}
-            {props.queries && Object.values(props.queries)?.length > 0 ?
-                <button onClick={() => setRefresh(true)} className={"button is-small left-margin"}><i
-                    className="fa-solid fa-arrows-rotate"></i></button> : <span/>}
+            {props.queries && Object.values(props.queries)?.length > 0 ? <button onClick={() => setRefresh(true)} className={"button is-small left-margin"}><i
+                className="fa-solid fa-arrows-rotate"></i></button> : <span/>}
 
             {data[selectedIndex] && (
                 <table>

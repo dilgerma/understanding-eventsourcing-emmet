@@ -1,0 +1,173 @@
+{
+  "id": "3458764620568298316",
+  "status": "Created",
+  "index": 9,
+  "title": "slice: products with price changes",
+  "context": "",
+  "sliceType": "STATE_VIEW",
+  "commands": [],
+  "events": [],
+  "readmodels": [
+    {
+      "id": "3458764620568352357",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: products with price changes",
+      "title": "products with price changes",
+      "fields": [
+        {
+          "name": "productId",
+          "type": "String",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "READMODEL",
+      "description": "",
+      "aggregate": "price",
+      "aggregateDependencies": [
+        "price",
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352354",
+          "type": "OUTBOUND",
+          "title": "Item Archiver",
+          "elementType": "AUTOMATION"
+        },
+        {
+          "id": "3458764620568353720",
+          "type": "INBOUND",
+          "title": "Price changed",
+          "elementType": "EVENT"
+        }
+      ],
+      "listElement": true,
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    },
+    {
+      "id": "3458764620568352353",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: products with price changes",
+      "title": "Carts with Products",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        },
+        {
+          "name": "itemId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "READMODEL",
+      "description": "",
+      "aggregate": "price",
+      "aggregateDependencies": [
+        "price",
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352354",
+          "type": "OUTBOUND",
+          "title": "Item Archiver",
+          "elementType": "AUTOMATION"
+        },
+        {
+          "id": "3458764620568353695",
+          "type": "INBOUND",
+          "title": "Cart submitted",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353713",
+          "type": "INBOUND",
+          "title": "Item Archived",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353694",
+          "type": "INBOUND",
+          "title": "Cart cleared",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353693",
+          "type": "INBOUND",
+          "title": "Item removed",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353692",
+          "type": "INBOUND",
+          "title": "Item Added",
+          "elementType": "EVENT"
+        }
+      ],
+      "listElement": true,
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "screens": [],
+  "screenImages": [],
+  "processors": [],
+  "tables": [],
+  "specifications": [],
+  "actors": [],
+  "aggregates": [
+    "price",
+    "Cart"
+  ]
+}

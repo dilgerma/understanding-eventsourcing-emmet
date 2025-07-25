@@ -1,5 +1,5 @@
 import {DeciderSpecification} from '@event-driven-io/emmett';
-import {AddItemCommand, decide, evolve} from "./AddItemCommand";
+import {AddItemCommand, AddItemState, decide, evolve} from "./AddItemCommand";
 import {describe, it} from "node:test";
 
 
@@ -16,12 +16,12 @@ describe('AddItem Specification', () => {
         const command: AddItemCommand = {
             type: 'AddItem',
             data: {
-                aggregateId: "b3ad86c7-c472-45f9-8f74-15d02509e20f",
-                description: "8a4c632b-0519-4a65-a572-3e3724eaed83",
-                price: 231.3362263736647,
-                itemId: "ee982462-a733-43ee-b022-9ae8a98ab0b9",
-                name: "ecf2fd22-a3a5-4e35-81a8-ff818d38616a",
-                productId: "48a994e4-4a32-4eac-8b33-028d09ec97d9"
+                aggregateId: "92187414-0793-4861-a2af-a5ee53bc330b",
+                description: "2ee2d7ef-c7c4-46f3-8768-3ae2e638303b",
+                price: 634.264155999322,
+                itemId: "5eb56888-0115-498b-97b2-594eb09623bb",
+                name: "d7a373bb-87f1-48aa-983f-4430c8338a61",
+                productId: "cc5caf9c-974c-49ea-b3f8-020c45ee2a31"
             },
             metadata: {now: new Date()},
         }
@@ -29,36 +29,36 @@ describe('AddItem Specification', () => {
         given([{
             type: 'ItemAdded',
             data: {
-                aggregateId: "88af4edd-0ab2-44c2-8209-eecc0181039e",
-                description: "4d8701bc-fb8b-4c17-991d-3d0b516559f0",
-                itemId: "fda43c58-a260-4c7e-8508-a84eb61c8dc1",
-                name: "73a6e68a-994c-46eb-b1bf-07f2802632dd",
-                price: 922.4979774593129,
-                productId: "20526da1-ea88-4dfd-9a60-ece54f664119"
+                aggregateId: "399d6e5d-df77-4f78-a221-bccc78b664a3",
+                description: "c2d3a0d5-31c4-4908-80c3-78852bc03dcc",
+                itemId: "7517f755-ddaa-4cad-8c80-ae94d25eae1a",
+                name: "02b9fcf7-93d2-40b6-82ce-a3c63a3481da",
+                price: 843.1093173257032,
+                productId: "ac58669c-8c08-46f4-807b-9356059cef02"
             },
 
         },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "ed1292d7-1744-410c-bfda-0bacb33b01c2",
-                    description: "c0d46c37-7d40-4cc4-a6a9-fd2c2f0738d1",
-                    itemId: "c30a10dd-d26d-4b78-bfa8-41b049cacdf5",
-                    name: "9373462f-cb31-41aa-a935-cc5ef17b12b4",
-                    price: 713.6677958234219,
-                    productId: "684f8817-136e-45eb-a55e-de629aaba856"
+                    aggregateId: "e2a038c3-0c6e-4270-870d-1436016ab6b0",
+                    description: "2a097100-b3a2-40bf-ac7e-d94ee7d6501a",
+                    itemId: "4d55b991-fca8-45bc-a221-fbc0a5ff0874",
+                    name: "fd75e421-dd1f-45fd-8c9b-21c399b485d1",
+                    price: 221.8069197866579,
+                    productId: "e51a6854-61bd-41ba-a42d-8c0fb926be92"
                 },
 
             },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "ad93a70d-bb82-4782-8000-6f5948438924",
-                    description: "7e79a6ba-cd60-4db8-9cb1-c466af541bd2",
-                    itemId: "cef34f10-9656-4ed2-8df2-76cce7c6a570",
-                    name: "43400486-6971-4910-bd91-c2087fc51c27",
-                    price: 920.6764330945351,
-                    productId: "36be28bb-7818-45cd-9e16-66dada2eb15b"
+                    aggregateId: "71c5c9d4-0753-4d3f-9915-c83eae31f28c",
+                    description: "2eae6090-9082-43d9-91ad-9a0a5d832b96",
+                    itemId: "5d9cb404-ef5a-4ec1-9663-89de86ec2c9c",
+                    name: "cdfa1ffa-6145-4894-97f5-0bc59a282ea9",
+                    price: 333.0856237357358,
+                    productId: "88b5d410-25f3-4302-8d6b-8f04251b2ff6"
                 },
 
             }])
@@ -70,12 +70,12 @@ describe('AddItem Specification', () => {
         const command: AddItemCommand = {
             type: 'AddItem',
             data: {
-                aggregateId: "68c66a04-9d42-4da8-b945-3894b377a7b9",
-                description: "a3605916-f383-4626-858b-2733d524dee1",
-                price: 567.4357173279851,
-                itemId: "f0b4de97-4249-4302-82ab-4a5184e49163",
-                name: "5e68bc35-970d-4b93-9df0-03b43d4fb7d0",
-                productId: "7ead1e5d-8711-49aa-8a8b-98483dd5dba8"
+                aggregateId: "9b0289e5-b230-4a8f-a8e8-351f2e419410",
+                description: "1bb84d69-9a49-4fc5-b30e-514622002765",
+                price: 511.71707336216963,
+                itemId: "2423d83f-ebc3-424e-8655-c240d4e304e6",
+                name: "4e9dfb9e-80da-4147-a245-1a0909db7030",
+                productId: "1d86e7fa-3d23-453c-8d8d-e4f4623793d0"
             },
             metadata: {now: new Date()},
         }

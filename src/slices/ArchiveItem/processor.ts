@@ -1,6 +1,6 @@
 import {ProcessorConfig, startProcessor} from "../../process/process";
 import {ItemsToBeArchivedReadModel} from "../ItemsToBeArchived/ItemsToBeArchivedProjection";
-import {ArchiveItemCommand, handleArchiveItem} from "./ArchiveItemCommand";
+import {handleArchiveItem, ArchiveItemCommand} from "./ArchiveItemCommand";
 
 const config: ProcessorConfig = {
     schedule: '*/30 * * * * *',
@@ -17,10 +17,10 @@ export const processor = {
             const command: ArchiveItemCommand = {
                 type: "ArchiveItem",
                 data: {
-                    aggregateId: item.data.aggregateId!,
-                    itemId: item.data.itemId!,
-                    productId: item.data.productId!
-                }
+                   			aggregateId:item.data.aggregateId!,
+			itemId:item.data.itemId!,
+			productId:item.data.productId!
+                },metadata: {}
             }
             await handleArchiveItem(command.data[idAttribute], command)
         })

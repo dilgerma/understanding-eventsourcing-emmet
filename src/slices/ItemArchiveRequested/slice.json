@@ -1,0 +1,246 @@
+{
+  "id": "3458764620568352368",
+  "status": "Created",
+  "index": 11,
+  "title": "slice: Item Archive Requested",
+  "context": "",
+  "sliceType": "STATE_CHANGE",
+  "commands": [
+    {
+      "id": "3458764620568352359",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Item Archive Requested",
+      "title": "Request to archive item",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        },
+        {
+          "name": "itemId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "COMMAND",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568353712",
+          "type": "OUTBOUND",
+          "title": "Item Archive Requested",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568352354",
+          "type": "INBOUND",
+          "title": "Item Archiver",
+          "elementType": "AUTOMATION"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "3458764620568353712",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Item Archive Requested",
+      "title": "Item Archive Requested",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        },
+        {
+          "name": "itemId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "EVENT",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352361",
+          "type": "OUTBOUND",
+          "title": "Items to be archived",
+          "elementType": "READMODEL"
+        },
+        {
+          "id": "3458764620568352359",
+          "type": "INBOUND",
+          "title": "Request to archive item",
+          "elementType": "COMMAND"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "readmodels": [],
+  "screens": [],
+  "screenImages": [],
+  "processors": [
+    {
+      "id": "3458764620568352354",
+      "tags": [],
+      "groupId": "3458764620568353792",
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Item Archive Requested",
+      "title": "Item Archiver",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "itemId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "AUTOMATION",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352359",
+          "type": "OUTBOUND",
+          "title": "Request to archive item",
+          "elementType": "COMMAND"
+        },
+        {
+          "id": "3458764620568352357",
+          "type": "INBOUND",
+          "title": "products with price changes",
+          "elementType": "READMODEL"
+        },
+        {
+          "id": "3458764620568352353",
+          "type": "INBOUND",
+          "title": "Carts with Products",
+          "elementType": "READMODEL"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "tables": [],
+  "specifications": [],
+  "actors": [],
+  "aggregates": [
+    "Cart"
+  ]
+}

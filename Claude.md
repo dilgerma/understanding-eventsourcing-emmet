@@ -7,10 +7,10 @@ Read Events in src/events to understand the global structure.
 - **CSS Framework**: Use Bulma CSS exclusively for all styling
 - **Assumption**: Bulma CSS is already available and imported in the project
 - **Styling Guidelines**:
-    - Use Bulma's utility classes and components
-    - Follow Bulma's naming conventions and class structure
-    - Leverage Bulma's responsive design features
-    - Prefer Bulma components over custom CSS
+  - Use Bulma's utility classes and components
+  - Follow Bulma's naming conventions and class structure
+  - Leverage Bulma's responsive design features
+  - Prefer Bulma components over custom CSS
 
 ## File Structure Constraints
 - **Strict Path Limitation**: if not instructed otherwise, only check `src/slices/{slicename}/*.ts`

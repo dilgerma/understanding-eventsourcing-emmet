@@ -1,0 +1,350 @@
+{
+  "id": "3458764620568298310",
+  "status": "Created",
+  "index": 5,
+  "title": "slice: Item removed",
+  "context": "",
+  "sliceType": "STATE_CHANGE",
+  "commands": [
+    {
+      "id": "3458764620568352118",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Item removed",
+      "title": "Remove Item",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": true
+        },
+        {
+          "name": "itemId",
+          "type": "UUID",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "excludeFromApi": false
+        },
+        {
+          "name": "productId",
+          "type": "UUID",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "COMMAND",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568353693",
+          "type": "OUTBOUND",
+          "title": "Item removed",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568352152",
+          "type": "INBOUND",
+          "title": "title",
+          "elementType": "SCREEN"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "3458764620568353693",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Item removed",
+      "title": "Item removed",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": true
+        },
+        {
+          "name": "itemId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "excludeFromApi": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "EVENT",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352353",
+          "type": "OUTBOUND",
+          "title": "Carts with Products",
+          "elementType": "READMODEL"
+        },
+        {
+          "id": "3458764620568352229",
+          "type": "OUTBOUND",
+          "title": "Carts to be published",
+          "elementType": "READMODEL"
+        },
+        {
+          "id": "3458764620568352121",
+          "type": "OUTBOUND",
+          "title": "cart items",
+          "elementType": "READMODEL"
+        },
+        {
+          "id": "3458764620568352118",
+          "type": "INBOUND",
+          "title": "Remove Item",
+          "elementType": "COMMAND"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "readmodels": [],
+  "screens": [
+    {
+      "id": "3458764620568352152",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Item removed",
+      "title": "title",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "UUID",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "excludeFromApi": false
+        },
+        {
+          "name": "price",
+          "type": "Double",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "excludeFromApi": false
+        },
+        {
+          "name": "itemId",
+          "type": "UUID",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "excludeFromApi": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "SCREEN",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352118",
+          "type": "OUTBOUND",
+          "title": "Remove Item",
+          "elementType": "COMMAND"
+        },
+        {
+          "id": "3458764620568352121",
+          "type": "INBOUND",
+          "title": "cart items",
+          "elementType": "READMODEL"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "screenImages": [],
+  "processors": [],
+  "tables": [],
+  "specifications": [
+    {
+      "vertical": true,
+      "id": "3458764621139273508",
+      "sliceName": "slice: Item removed",
+      "title": "spec: Item removed",
+      "given": [],
+      "when": [
+        {
+          "title": "Remove Item",
+          "tags": [],
+          "id": "3458764621139273509",
+          "index": 0,
+          "specRow": -1,
+          "type": "SPEC_COMMAND",
+          "fields": [
+            {
+              "name": "aggregateId",
+              "type": "String",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": true,
+              "technicalAttribute": true
+            },
+            {
+              "name": "itemId",
+              "type": "UUID",
+              "schema": "",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": false,
+              "excludeFromApi": false
+            },
+            {
+              "name": "productId",
+              "type": "UUID",
+              "schema": "",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": false,
+              "technicalAttribute": false
+            }
+          ],
+          "linkedId": "3458764620568352118",
+          "expectEmptyList": false
+        }
+      ],
+      "then": [
+        {
+          "title": "Error-Case",
+          "tags": [],
+          "id": "3458764621139273512",
+          "index": 0,
+          "specRow": -1,
+          "type": "SPEC_ERROR",
+          "expectEmptyList": false
+        }
+      ],
+      "comments": [],
+      "linkedId": "3458764620568298310"
+    }
+  ],
+  "actors": [],
+  "aggregates": [
+    "Cart"
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "id": "3458764620568298314",
+  "status": "Created",
+  "index": 19,
+  "title": "slice: inventories",
+  "context": "",
+  "sliceType": "STATE_VIEW",
+  "commands": [],
+  "events": [],
+  "readmodels": [
+    {
+      "id": "3458764620568352269",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: inventories",
+      "title": "inventories",
+      "fields": [
+        {
+          "name": "productId",
+          "type": "String",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "inventory",
+          "type": "Int",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "READMODEL",
+      "description": "",
+      "aggregate": "inventory",
+      "aggregateDependencies": [
+        "inventory"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352101",
+          "type": "OUTBOUND",
+          "title": "title",
+          "elementType": "SCREEN"
+        },
+        {
+          "id": "3458764620568353723",
+          "type": "INBOUND",
+          "title": "Inventory Updated",
+          "elementType": "EVENT"
+        }
+      ],
+      "listElement": true,
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "screens": [
+    {
+      "id": "3458764620568352101",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: inventories",
+      "title": "title",
+      "fields": [
+        {
+          "name": "inventory",
+          "type": "Int",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "cardinality": "Single",
+          "idAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "cardinality": "Single",
+          "idAttribute": false
+        }
+      ],
+      "type": "SCREEN",
+      "description": "",
+      "aggregate": "inventory",
+      "aggregateDependencies": [
+        "inventory"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352269",
+          "type": "INBOUND",
+          "title": "inventories",
+          "elementType": "READMODEL"
+        }
+      ],
+      "apiEndpoint": "",
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "screenImages": [],
+  "processors": [],
+  "tables": [],
+  "specifications": [],
+  "actors": [],
+  "aggregates": [
+    "inventory"
+  ]
+}

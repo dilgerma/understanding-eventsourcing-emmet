@@ -1,0 +1,203 @@
+{
+  "id": "3458764620568298315",
+  "status": "Created",
+  "index": 7,
+  "title": "slice: Change Price",
+  "context": "",
+  "sliceType": "STATE_CHANGE",
+  "commands": [
+    {
+      "id": "3458764620568352349",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Change Price",
+      "title": "Change Price",
+      "fields": [
+        {
+          "name": "productId",
+          "type": "String",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "price",
+          "type": "Double",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "COMMAND",
+      "description": "",
+      "aggregate": "price",
+      "aggregateDependencies": [
+        "price"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568353720",
+          "type": "OUTBOUND",
+          "title": "Price changed",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568352347",
+          "type": "INBOUND",
+          "title": "automation",
+          "elementType": "AUTOMATION"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "3458764620568353720",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Change Price",
+      "title": "Price changed",
+      "fields": [
+        {
+          "name": "productId",
+          "type": "String",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "price",
+          "type": "Double",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "EVENT",
+      "description": "",
+      "aggregate": "price",
+      "aggregateDependencies": [
+        "price"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352357",
+          "type": "OUTBOUND",
+          "title": "products with price changes",
+          "elementType": "READMODEL"
+        },
+        {
+          "id": "3458764620568352349",
+          "type": "INBOUND",
+          "title": "Change Price",
+          "elementType": "COMMAND"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "readmodels": [],
+  "screens": [],
+  "screenImages": [],
+  "processors": [
+    {
+      "id": "3458764620568352347",
+      "tags": [],
+      "groupId": "3458764620568353791",
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Change Price",
+      "title": "automation",
+      "fields": [
+        {
+          "name": "price",
+          "type": "Double",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "AUTOMATION",
+      "description": "",
+      "aggregate": "price",
+      "aggregateDependencies": [
+        "price"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352349",
+          "type": "OUTBOUND",
+          "title": "Change Price",
+          "elementType": "COMMAND"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "tables": [],
+  "specifications": [],
+  "actors": [],
+  "aggregates": [
+    "price"
+  ]
+}

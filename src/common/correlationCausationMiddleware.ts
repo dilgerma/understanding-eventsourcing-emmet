@@ -1,20 +1,9 @@
 const crypto = require('crypto');
-import { Request, Response, NextFunction } from 'express';
+import {Request, Response, NextFunction} from 'express';
 
-/**
- * Simple correlation and causation ID middleware
- * Works purely with request/response headers
- */
-interface MiddlewareOptions {
-    correlationHeader?: string;
-    causationHeader?: string;
-}
-
-const correlationCausationMiddleware = (options: MiddlewareOptions = {}) => {
-    const {
-        correlationHeader = 'x-correlation-id',
-        causationHeader = 'x-causation-id'
-    } = options;
+export const correlationCausationMiddleware = () => {
+    const correlationHeader = 'x-correlation-id';
+    const causationHeader = 'x-causation-id';
 
     return (req: Request, res: Response, next: NextFunction) => {
         // Get causation ID or generate new one
@@ -40,5 +29,3 @@ const correlationCausationMiddleware = (options: MiddlewareOptions = {}) => {
         next();
     };
 };
-
-module.exports = correlationCausationMiddleware;

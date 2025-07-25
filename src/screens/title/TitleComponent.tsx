@@ -13,67 +13,67 @@ export default function TitleComponent(props: any) {
 
     const [view, setView] = useState<string>()
 
-    return (
+                    return (
 
-        <div className="content container">
-            <Navigation/>
-            <img className="banner" src={"/assets/banner.png"}/>
+            <div className="content container">
+                <Navigation/>
+                <img className="banner" src={"/assets/banner.png"}/>
 
-            <main>
-                <div className="grid">
-
-                    <div className={"cell command"}
-                         onClick={() => setView("clearcart")}>
-                        <h3>ClearCart</h3>
-                        <div>
-                            COMMAND
+                <main>
+                    <div className="grid">
+                        
+                        <div className={"cell command"}
+                             onClick={() => setView("clearcart")}>
+                            <h3>ClearCart</h3>
+                            <div>
+                                COMMAND
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={"cell command"}
-                         onClick={() => setView("removeitem")}>
-                        <h3>RemoveItem</h3>
-                        <div>
-                            COMMAND
+                        <div className={"cell command"}
+                             onClick={() => setView("removeitem")}>
+                            <h3>RemoveItem</h3>
+                            <div>
+                                COMMAND
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={"cell command"}
-                         onClick={() => setView("submitcart")}>
-                        <h3>SubmitCart</h3>
-                        <div>
-                            COMMAND
+                        <div className={"cell command"}
+                             onClick={() => setView("submitcart")}>
+                            <h3>SubmitCart</h3>
+                            <div>
+                                COMMAND
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={"cell readmodel"}
-                         onClick={() => setView("cartitems")}>
-                        <h3>cartitems</h3>
-                        <div>
-                            READMODEL
+                        <div className={"cell readmodel"}
+                             onClick={() => setView("cartitems")}>
+                            <h3>cartitems</h3>
+                            <div>
+                                READMODEL
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={"cell readmodel"}
-                         onClick={() => setView("inventories")}>
-                        <h3>inventories</h3>
-                        <div>
-                            READMODEL
+                        <div className={"cell readmodel"}
+                             onClick={() => setView("inventories")}>
+                            <h3>inventories</h3>
+                            <div>
+                                READMODEL
+                            </div>
                         </div>
-                    </div>
-                </div>
+                   </div>
 
-                {/* main */}
-                <div className={"top-margin"}/>
+                 {/* main */}
+                  <div className={"top-margin"}/>
 
-                {view == "clearcart" ? <ClearCartCommandComponent/> : <span/>}
-                {view == "removeitem" ? <RemoveItemCommandComponent/> : <span/>}
-                {view == "submitcart" ? <SubmitCartCommandComponent/> : <span/>}
-                {view == "cartitems" ? <CartItemsReadModelStateView/> : <span/>}
-                {view == "inventories" ? <InventoriesReadModelStateView/> : <span/>}
+                   {view == "clearcart" ? <ClearCartCommandComponent/> : <span/>}
+{view == "removeitem" ? <RemoveItemCommandComponent/> : <span/>}
+{view == "submitcart" ? <SubmitCartCommandComponent/> : <span/>}
+{view == "cartitems" ? <CartItemsReadModelStateView/> : <span/>}
+{view == "inventories" ? <InventoriesReadModelStateView/> : <span/>}
 
-            </main>
-        </div>
+                </main>
+            </div>
 
     );
 }

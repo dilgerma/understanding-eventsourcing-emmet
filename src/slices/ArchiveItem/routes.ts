@@ -1,17 +1,18 @@
-import {Request, Response, Router} from 'express';
-import {ArchiveItemCommand, handleArchiveItem} from './ArchiveItemCommand';
+import { Router, Request, Response } from 'express';
+import { ArchiveItemCommand, handleArchiveItem } from './ArchiveItemCommand';
 import {requireUser} from "../../supabase/requireUser";
-import {WebApiSetup} from "@event-driven-io/emmett-expressjs";
+import {on, WebApiSetup} from "@event-driven-io/emmett-expressjs";
+import {assertNotEmptyString} from "@event-driven-io/emmett";
 import {assertNotEmpty} from "../../components/util/assertions";
 
 export type ArchiveItemRequestPayload = {
-    aggregateId?: string,
-    itemId?: string,
-    productId?: string
+    aggregateId?:string,
+itemId?:string,
+productId?:string
 }
 
 export type ArchiveItemRequest = Request<
-    Partial<{ id: string }>,
+    Partial<{ id:string }>,
     unknown,
     Partial<ArchiveItemRequestPayload>
 >;
@@ -28,20 +29,24 @@ export const api =
                 }
 
                 try {
-                    const command: ArchiveItemCommand = {
+                    const command:ArchiveItemCommand = {
                         data: {
-                            aggregateId: assertNotEmpty(req.body.aggregateId),
-                            itemId: assertNotEmpty(req.body.itemId),
-                            productId: assertNotEmpty(req.body.productId)
+                            			aggregateId:assertNotEmpty(req.body.aggregateId),
+			itemId:assertNotEmpty(req.body.itemId),
+			productId:assertNotEmpty(req.body.productId)
                             //amount: req.body.amount,
+                        },
+                        metadata: {
+                            correlation_id: req.header("correlation_id"),
+                            causation_id: req.params.id
                         },
                         type: "ArchiveItem"
                     }
                     await handleArchiveItem(assertNotEmpty(req.params.id), command);
-                    return res.status(200).json({ok: true});
+                    return res.status(200).json({ ok: true });
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ok: false, error: 'Server error'});
+                    return res.status(500).json({ ok: false, error: 'Server error' });
                 }
             });
         };

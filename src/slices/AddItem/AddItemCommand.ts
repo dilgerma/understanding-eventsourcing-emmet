@@ -1,82 +1,141 @@
-import type {Command} from '@event-driven-io/emmett'
-import {CommandHandler} from '@event-driven-io/emmett';
+import type { Command } from '@event-driven-io/emmett'
+import { CommandHandler } from '@event-driven-io/emmett';
 import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type AddItemCommand = Command<'AddItem', {
-    aggregateId: string,
-    description: string,
-    price: number,
-    itemId: string,
-    name: string,
-    productId: string,
-}>;
+          aggregateId: string,
+  description: string,
+  price: number,
+  itemId: string,
+  name: string,
+  productId: string
+        },
+        {
+            correlation_id?:string,
+causation_id?:string
+        }|undefined>;
 
+// TODO-AI keep attributes in state optional
 export type AddItemState = {
-    itemCount?: number;
 }
 
 export const AddItemInitialState = (): AddItemState => ({
-    itemCount: 0
 });
 
 export const evolve = (
     state: AddItemState,
     event: CartEvents,
 ): AddItemState => {
-    const {type, data} = event;
+    const { type, data } = event;
 
     switch (type) {
-        case "ItemAdded":
-            return {
-                ...state,
-                itemCount: (state.itemCount ?? 0) + 1
-            };
-        case "ItemRemoved":
-            return {
-                ...state,
-                itemCount: Math.max(0, (state.itemCount ?? 0) - 1)
-            };
-        case "CartCleared":
-            return {
-                ...state,
-                itemCount: 0
-            };
+        // case "..Event":
         default:
             return state;
     }
 };
 
-export const decide = (
+/*
+AI-TODO start: implement according to the specifications provided.
+Stick to the specification, don´t add new fields, which are not specified.
+
+in case an error is expected - throw an error
+
+Remove the TODO Comment afterwards.
+
+
+# Spec Start
+Title: spec: At most 3 Items
+Comments:
+  - can only add 3 items to the cart
+### Given (Events):
+  * 'Item Added' (SPEC_EVENT)
+Fields:
+ - aggregateId: 
+ - description: 
+ - itemId: 
+ - name: 
+ - price: 
+ - productId: 
+  * 'Item Added' (SPEC_EVENT)
+Fields:
+ - aggregateId: 
+ - description: 
+ - itemId: 
+ - name: 
+ - price: 
+ - productId: 
+  * 'Item Added' (SPEC_EVENT)
+Fields:
+ - aggregateId: 
+ - description: 
+ - itemId: 
+ - name: 
+ - price: 
+ - productId: 
+### When (Command):
+  * 'Add Item' (SPEC_COMMAND)
+Fields:
+ - aggregateId: 
+ - description: 
+ - price: 
+ - itemId: 
+ - name: 
+ - productId: 
+### Then:
+  * 'Error-Case' (SPEC_ERROR)
+# Spec End
+
+# Spec Start
+Title: spec: Add Item
+### Given (Events): None
+### When (Command):
+  * 'Add Item' (SPEC_COMMAND)
+Fields:
+ - aggregateId: 
+ - description: 
+ - price: 
+ - itemId: 
+ - name: 
+ - productId: 
+### Then:
+  * 'Item Added' (SPEC_EVENT)
+Fields:
+ - aggregateId: 
+ - description: 
+ - itemId: 
+ - name: 
+ - price: 
+ - productId: 
+# Spec End
+AI-TODO end
+*/
+    export const decide = (
     command: AddItemCommand,
     state: AddItemState,
 ): CartEvents[] => {
-    if ((state.itemCount ?? 0) >= 3) {
-        throw new Error("Cannot add more than 3 items to the cart");
-    }
-    
     return [{
         type: "ItemAdded",
-        data: {
-            aggregateId: command.data.aggregateId,
-            description: command.data.description,
-            itemId: command.data.itemId,
-            name: command.data.name,
-            price: command.data.price,
-            productId: command.data.productId
-        },metadata:{
-            correlationId:"1",
-            tenant: "mueller"
-        }
-    }]
+            data: {
+        			aggregateId:command.data.aggregateId,
+			description:command.data.description,
+			itemId:command.data.itemId,
+			name:command.data.name,
+			price:command.data.price,
+			productId:command.data.productId
+    }, metadata: {
+        correlation_id: command.metadata?.correlation_id,
+        causation_id: command.metadata?.causation_id
+    }}]
 };
 
 
-const AddItemCommandHandler = CommandHandler<AddItemState, CartEvents>({evolve, initialState: AddItemInitialState});
+const AddItemCommandHandler = CommandHandler<AddItemState, CartEvents>({evolve,initialState:AddItemInitialState});
 
-export const handleAddItem = async (id: string, command: AddItemCommand) => {
+export const handleAddItem = async (id:string,command:AddItemCommand) => {
     const eventStore = await findEventstore()
-    await AddItemCommandHandler(eventStore, id, (state: AddItemState) => decide(command, state))
+    await AddItemCommandHandler(eventStore, id, (state:AddItemState)=>decide(command,state))
 
 }
 

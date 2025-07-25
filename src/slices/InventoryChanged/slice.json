@@ -1,0 +1,214 @@
+{
+  "id": "3458764620568298313",
+  "status": "Created",
+  "index": 17,
+  "title": "slice: Inventory changed",
+  "context": "",
+  "sliceType": "STATE_CHANGE",
+  "commands": [
+    {
+      "id": "3458764620568352267",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Inventory changed",
+      "title": "Import Inventory",
+      "fields": [
+        {
+          "name": "inventory",
+          "type": "Int",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "COMMAND",
+      "description": "",
+      "aggregate": "inventory",
+      "aggregateDependencies": [
+        "inventory"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568353723",
+          "type": "OUTBOUND",
+          "title": "Inventory Updated",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568352265",
+          "type": "INBOUND",
+          "title": "Inventory Translator",
+          "elementType": "AUTOMATION"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "3458764620568353723",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Inventory changed",
+      "title": "Inventory Updated",
+      "fields": [
+        {
+          "name": "inventory",
+          "type": "Int",
+          "schema": "",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "EVENT",
+      "description": "",
+      "aggregate": "inventory",
+      "aggregateDependencies": [
+        "inventory"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352269",
+          "type": "OUTBOUND",
+          "title": "inventories",
+          "elementType": "READMODEL"
+        },
+        {
+          "id": "3458764620568352267",
+          "type": "INBOUND",
+          "title": "Import Inventory",
+          "elementType": "COMMAND"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "readmodels": [],
+  "screens": [],
+  "screenImages": [],
+  "processors": [
+    {
+      "id": "3458764620568352265",
+      "tags": [],
+      "groupId": "3458764620568353786",
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Inventory changed",
+      "title": "Inventory Translator",
+      "fields": [
+        {
+          "name": "inventory",
+          "type": "Int",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "AUTOMATION",
+      "description": "",
+      "aggregate": "inventory",
+      "aggregateDependencies": [
+        "inventory"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352267",
+          "type": "OUTBOUND",
+          "title": "Import Inventory",
+          "elementType": "COMMAND"
+        },
+        {
+          "id": "3458764620568353734",
+          "type": "INBOUND",
+          "title": "Inventory changed",
+          "elementType": "EVENT"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [
+        {
+          "title": "Inventory changed",
+          "id": "3458764620568353734"
+        }
+      ],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "tables": [],
+  "specifications": [],
+  "actors": [],
+  "aggregates": [
+    "inventory"
+  ]
+}

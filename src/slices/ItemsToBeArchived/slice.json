@@ -1,0 +1,99 @@
+{
+  "id": "3458764620568352369",
+  "status": "Created",
+  "index": 13,
+  "title": "slice: Items to be archived",
+  "context": "",
+  "sliceType": "STATE_VIEW",
+  "commands": [],
+  "events": [],
+  "readmodels": [
+    {
+      "id": "3458764620568352361",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Items to be archived",
+      "title": "Items to be archived",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "technicalAttribute": false
+        },
+        {
+          "name": "productId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        },
+        {
+          "name": "itemId",
+          "type": "String",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "technicalAttribute": false
+        }
+      ],
+      "type": "READMODEL",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352362",
+          "type": "OUTBOUND",
+          "title": "Item archiver",
+          "elementType": "AUTOMATION"
+        },
+        {
+          "id": "3458764620568353713",
+          "type": "INBOUND",
+          "title": "Item Archived",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353712",
+          "type": "INBOUND",
+          "title": "Item Archive Requested",
+          "elementType": "EVENT"
+        }
+      ],
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "screens": [],
+  "screenImages": [],
+  "processors": [],
+  "tables": [],
+  "specifications": [],
+  "actors": [],
+  "aggregates": [
+    "Cart"
+  ]
+}

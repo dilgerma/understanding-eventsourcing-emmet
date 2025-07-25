@@ -1,0 +1,120 @@
+{
+  "id": "3458764620568298311",
+  "status": "Created",
+  "index": 21,
+  "title": "slice: Carts to be published",
+  "context": "",
+  "sliceType": "STATE_VIEW",
+  "commands": [],
+  "events": [],
+  "readmodels": [
+    {
+      "id": "3458764620568352229",
+      "tags": [],
+      "domain": "Cart",
+      "modelContext": "Cart",
+      "context": "INTERNAL",
+      "slice": "slice: Carts to be published",
+      "title": "Carts to be published",
+      "fields": [
+        {
+          "name": "aggregateId",
+          "type": "UUID",
+          "example": "",
+          "mapping": "",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": true,
+          "excludeFromApi": false
+        },
+        {
+          "name": "totalPrice",
+          "type": "Double",
+          "schema": "",
+          "example": "",
+          "mapping": "price",
+          "optional": false,
+          "generated": false,
+          "cardinality": "Single",
+          "idAttribute": false,
+          "excludeFromApi": false
+        },
+        {
+          "name": "orderedProducts",
+          "type": "Custom",
+          "example": "{\"productId\":\"1\", \"price\":9.99}",
+          "mapping": "Item Added",
+          "optional": false,
+          "generated": false,
+          "cardinality": "List",
+          "idAttribute": false,
+          "excludeFromApi": false
+        }
+      ],
+      "type": "READMODEL",
+      "description": "",
+      "aggregate": "Cart",
+      "aggregateDependencies": [
+        "Cart"
+      ],
+      "dependencies": [
+        {
+          "id": "3458764620568352250",
+          "type": "OUTBOUND",
+          "title": "Cart Publisher",
+          "elementType": "AUTOMATION"
+        },
+        {
+          "id": "3458764620568353695",
+          "type": "INBOUND",
+          "title": "Cart submitted",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353694",
+          "type": "INBOUND",
+          "title": "Cart cleared",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353693",
+          "type": "INBOUND",
+          "title": "Item removed",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353692",
+          "type": "INBOUND",
+          "title": "Item Added",
+          "elementType": "EVENT"
+        },
+        {
+          "id": "3458764620568353726",
+          "type": "INBOUND",
+          "title": "Cart Published",
+          "elementType": "EVENT"
+        }
+      ],
+      "listElement": true,
+      "todoList": true,
+      "apiEndpoint": "",
+      "service": null,
+      "createsAggregate": false,
+      "triggers": [],
+      "sketched": false,
+      "prototype": {
+        "activeByDefault": false
+      }
+    }
+  ],
+  "screens": [],
+  "screenImages": [],
+  "processors": [],
+  "tables": [],
+  "specifications": [],
+  "actors": [],
+  "aggregates": [
+    "Cart"
+  ]
+}

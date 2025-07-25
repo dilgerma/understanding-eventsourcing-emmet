@@ -1,15 +1,16 @@
-import {Request, Response, Router} from 'express';
-import {ClearCartCommand, handleClearCart} from './ClearCartCommand';
+import { Router, Request, Response } from 'express';
+import { ClearCartCommand, handleClearCart } from './ClearCartCommand';
 import {requireUser} from "../../supabase/requireUser";
-import {WebApiSetup} from "@event-driven-io/emmett-expressjs";
+import {on, WebApiSetup} from "@event-driven-io/emmett-expressjs";
+import {assertNotEmptyString} from "@event-driven-io/emmett";
 import {assertNotEmpty} from "../../components/util/assertions";
 
 export type ClearCartRequestPayload = {
-    aggregateId?: string
+    aggregateId?:string
 }
 
 export type ClearCartRequest = Request<
-    Partial<{ id: string }>,
+    Partial<{ id:string }>,
     unknown,
     Partial<ClearCartRequestPayload>
 >;
@@ -26,18 +27,22 @@ export const api =
                 }
 
                 try {
-                    const command: ClearCartCommand = {
+                    const command:ClearCartCommand = {
                         data: {
-                            aggregateId: assertNotEmpty(req.body.aggregateId)
+                            			aggregateId:assertNotEmpty(req.body.aggregateId)
                             //amount: req.body.amount,
+                        },
+                        metadata: {
+                            correlation_id: req.header("correlation_id"),
+                            causation_id: req.params.id
                         },
                         type: "ClearCart"
                     }
                     await handleClearCart(assertNotEmpty(req.params.id), command);
-                    return res.status(200).json({ok: true});
+                    return res.status(200).json({ ok: true });
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ok: false, error: 'Server error'});
+                    return res.status(500).json({ ok: false, error: 'Server error' });
                 }
             });
         };

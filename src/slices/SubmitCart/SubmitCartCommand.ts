@@ -1,73 +1,89 @@
-import type {Command} from '@event-driven-io/emmett'
-import {CommandHandler} from '@event-driven-io/emmett';
+import type { Command } from '@event-driven-io/emmett'
+import { CommandHandler } from '@event-driven-io/emmett';
 import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type SubmitCartCommand = Command<'SubmitCart', {
-    aggregateId: string,
-}>;
+          aggregateId: string
+        },
+        {
+            correlation_id?:string,
+causation_id?:string
+        }|undefined>;
 
+// TODO-AI keep attributes in state optional
 export type SubmitCartState = {
-    inventory?: Map<string, number>;
-    items?: Array<{productId: string; itemId: string}>;
 }
 
 export const SubmitCartInitialState = (): SubmitCartState => ({
-    items: []
 });
 
 export const evolve = (
     state: SubmitCartState,
     event: CartEvents,
 ): SubmitCartState => {
-    const {type, data} = event;
+    const { type, data } = event;
 
     switch (type) {
-
-        case "ItemAdded":
-            return {
-                ...state,
-                items: [...(state.items ?? []), {productId: data.productId, itemId: data.itemId}]
-            };
-        case "ItemRemoved":
-            return {
-                ...state,
-                items: (state.items ?? []).filter(item => item.itemId !== data.itemId)
-            };
-        case "CartCleared":
-            return {
-                ...state,
-                items: []
-            };
+        // case "..Event":
         default:
             return state;
     }
 };
 
-export const decide = (
+/*
+AI-TODO start: implement according to the specifications provided.
+Stick to the specification, don´t add new fields, which are not specified.
+
+in case an error is expected - throw an error
+
+Remove the TODO Comment afterwards.
+
+
+# Spec Start
+Title: spec: submit cart items without inventory
+### Given (Events):
+  * 'Inventory Updated' (SPEC_EVENT)
+Fields:
+ - inventory: 
+ - productId: 
+  * 'Item Added' (SPEC_EVENT)
+Fields:
+ - aggregateId: 
+ - description: 
+ - itemId: 
+ - name: 
+ - price: 
+ - productId: 
+### When (Command):
+  * 'Submit Cart' (SPEC_COMMAND)
+Fields:
+ - aggregateId: 
+### Then:
+  * 'Error-Case' (SPEC_ERROR)
+# Spec End
+AI-TODO end
+*/
+    export const decide = (
     command: SubmitCartCommand,
     state: SubmitCartState,
 ): CartEvents[] => {
-    const inventory = state.inventory ?? new Map();
-    const items = state.items ?? [];
-    
     return [{
         type: "CartSubmitted",
-        data: {
-            aggregateId: command.data.aggregateId
-        }
-    }]
+            data: {
+        			aggregateId:command.data.aggregateId
+    }, metadata: {
+        correlation_id: command.metadata?.correlation_id,
+        causation_id: command.metadata?.causation_id
+    }}]
 };
 
 
-const SubmitCartCommandHandler = CommandHandler<SubmitCartState, CartEvents>({
-    evolve,
-    initialState: SubmitCartInitialState
-});
+const SubmitCartCommandHandler = CommandHandler<SubmitCartState, CartEvents>({evolve,initialState:SubmitCartInitialState});
 
-export const handleSubmitCart = async (id: string, command: SubmitCartCommand) => {
+export const handleSubmitCart = async (id:string,command:SubmitCartCommand) => {
     const eventStore = await findEventstore()
-    await SubmitCartCommandHandler(eventStore, id, (state: SubmitCartState) => decide(command, state))
+    await SubmitCartCommandHandler(eventStore, id, (state:SubmitCartState)=>decide(command,state))
 
 }
 
