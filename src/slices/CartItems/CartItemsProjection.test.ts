@@ -1,6 +1,6 @@
 import {before, describe, it} from "node:test";
 import {expectPongoDocuments, PostgreSQLProjectionSpec} from "@event-driven-io/emmett-postgresql";
-import {CartItemsProjection, CartItemsReadModel} from "@/app/slices/CartItems/CartItemsProjection";
+import {CartItemsProjection, CartItemsReadModel} from "./CartItemsProjection";
 import {PostgreSqlContainer, StartedPostgreSqlContainer} from "@testcontainers/postgresql";
 import {ItemArchived} from "../../events/ItemArchived"
 import {CartCleared} from "../../events/CartCleared"
@@ -9,7 +9,7 @@ import {ItemAdded} from "../../events/ItemAdded"
 
 describe('CartItems Specification', () => {
     let postgres: StartedPostgreSqlContainer;
-    let connectionString:string
+    let connectionString: string
 
     let given: PostgreSQLProjectionSpec<ItemArchived | CartCleared | ItemRemoved | ItemAdded>
 
@@ -23,52 +23,52 @@ describe('CartItems Specification', () => {
         });
     });
 
-     it('spec: cart items', async () => {
-        const aggregateId = "4cc27803-4f87-46b4-85ce-87da7670eb9c"
-const description = "b7d8fcad-ca49-4556-8370-16e1f721d9d1"
-const itemId = "fb3789b7-dc84-487f-be59-8e6af4fabfab"
-const name = "6da768f3-4374-41ea-96f4-455601fd5fb0"
-const price = 388.66957499209474
-const productId = "26e487d1-8bb4-4e31-b6d2-529fbcf1125f"
+    it('spec: cart items', async () => {
+        const aggregateId = "fb9e9f20-4e50-4111-a8d5-85d49261d7f7"
+        const description = "ea7d51c8-17a4-4f2a-b77a-587e37757272"
+        const itemId = "5f305092-f3ff-4eb4-9140-4c1c16d6f227"
+        const name = "6e74ba09-ad0a-458e-b8c9-0f65c9fb98c0"
+        const price = 456.47717028508737
+        const productId = "a0da3706-184b-4c9c-9363-576243ffcd3f"
         await given([{
-                        type: 'ItemAdded',
-                        data: {
-                            aggregateId: aggregateId,
-description: description,
-itemId: itemId,
-name: name,
-price: price,
-productId: productId
-                        },
-                        metadata: {streamName: '676e9c8c-9097-4fcc-a897-f80ceb743ec1'}
-                    },
-{
-                        type: 'ItemAdded',
-                        data: {
-                            aggregateId: aggregateId,
-description: description,
-itemId: itemId,
-name: name,
-price: price,
-productId: productId
-                        },
-                        metadata: {streamName: '676e9c8c-9097-4fcc-a897-f80ceb743ec1'}
-                    }])
+            type: 'ItemAdded',
+            data: {
+                aggregateId: aggregateId,
+                description: description,
+                itemId: itemId,
+                name: name,
+                price: price,
+                productId: productId
+            },
+            metadata: {streamName: 'c5c22011-a34f-41c5-80cb-dc79bf00a328'}
+        },
+            {
+                type: 'ItemAdded',
+                data: {
+                    aggregateId: aggregateId,
+                    description: description,
+                    itemId: itemId,
+                    name: name,
+                    price: price,
+                    productId: productId
+                },
+                metadata: {streamName: 'c5c22011-a34f-41c5-80cb-dc79bf00a328'}
+            }])
             .when([])
             .then(
                 expectPongoDocuments
                     .fromCollection<CartItemsReadModel>(
                         "CartItems-collection",
                     )
-                    .withId("676e9c8c-9097-4fcc-a897-f80ceb743ec1")
+                    .withId("c5c22011-a34f-41c5-80cb-dc79bf00a328")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
-itemId: itemId,
-name: name,
-price: price,
-productId: productId
-                            }]
+                            itemId: itemId,
+                            name: name,
+                            price: price,
+                            productId: productId
+                        }]
                     }),
             );
     });

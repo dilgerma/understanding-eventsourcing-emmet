@@ -1,6 +1,6 @@
 import {createServerClient, serializeCookieHeader} from '@supabase/ssr'
 import {Request, Response} from 'express'
-import { createClient as createSupabaseCLient } from '@supabase/supabase-js'
+import {createClient as createSupabaseCLient} from '@supabase/supabase-js'
 
 
 export const createServiceClient = () => {

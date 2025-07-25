@@ -6,7 +6,6 @@ import {join} from 'path';
 import {getApplication, startAPI, WebApiSetup} from '@event-driven-io/emmett-expressjs';
 import {glob} from "glob";
 import {replayProjection} from "./src/common/replay";
-import {correlationCausationMiddleware} from "./src/common/correlationCausationMiddleware";
 
 var cookieParser = require('cookie-parser')
 
@@ -47,15 +46,14 @@ app.prepare().then(async () => {
 
     const express = require('express');
     const app = express();
-    app.post("/internal/replay/:slice/:projectionName", async (req:Request, resp:Response)=>{
+    app.post("/internal/replay/:slice/:projectionName", async (req: Request, resp: Response) => {
         const {slice, projectionName} = req.params
         await replayProjection(slice, projectionName);
-        return resp.status(200).json({ status: 'ok' });
+        return resp.status(200).json({status: 'ok'});
     })
 
 
     app.use(cookieParser());
-    app.use(correlationCausationMiddleware())
 
     const application: Application = getApplication({
         apis: webApis,

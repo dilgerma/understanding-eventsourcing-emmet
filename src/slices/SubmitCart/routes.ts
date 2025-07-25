@@ -1,16 +1,16 @@
-import { Router, Request, Response } from 'express';
-import { SubmitCartCommand, handleSubmitCart } from './SubmitCartCommand';
+import {Router, Request, Response} from 'express';
+import {SubmitCartCommand, handleSubmitCart} from './SubmitCartCommand';
 import {requireUser} from "../../supabase/requireUser";
 import {on, WebApiSetup} from "@event-driven-io/emmett-expressjs";
 import {assertNotEmptyString} from "@event-driven-io/emmett";
 import {assertNotEmpty} from "../../components/util/assertions";
 
 export type SubmitCartRequestPayload = {
-    aggregateId?:string
+    aggregateId?: string
 }
 
 export type SubmitCartRequest = Request<
-    Partial<{ id:string }>,
+    Partial<{ id: string }>,
     unknown,
     Partial<SubmitCartRequestPayload>
 >;
@@ -26,23 +26,35 @@ export const api =
                     return res.status(401).json(principal); // Adjust status code as needed
                 }
 
+                const correlation_id = req.header("correlation_id") ?? req.params.id
+                const causation_id = req.params.id
+
                 try {
-                    const command:SubmitCartCommand = {
+                    const command: SubmitCartCommand = {
                         data: {
-                            			aggregateId:assertNotEmpty(req.body.aggregateId)
+                            aggregateId: assertNotEmpty(req.body.aggregateId)
                             //amount: req.body.amount,
                         },
                         metadata: {
-                            correlation_id: req.header("correlation_id"),
-                            causation_id: req.params.id
+                            correlation_id: correlation_id,
+                            causation_id: causation_id
                         },
                         type: "SubmitCart"
                     }
-                    await handleSubmitCart(assertNotEmpty(req.params.id), command);
-                    return res.status(200).json({ ok: true });
+
+                    const result = await handleSubmitCart(assertNotEmpty(req.params.id), command);
+
+                    res.set("correlation_id", correlation_id)
+                    res.set("causation_id", causation_id)
+
+                    return res.status(200).json({
+                        ok: true,
+                        next_expected_stream_version: result.nextExpectedStreamVersion?.toString(),
+                        last_event_global_position: result.lastEventGlobalPosition?.toString()
+                    });
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ ok: false, error: 'Server error' });
+                    return res.status(500).json({ok: false, error: 'Server error'});
                 }
             });
         };

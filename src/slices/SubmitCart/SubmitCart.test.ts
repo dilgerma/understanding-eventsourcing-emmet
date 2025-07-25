@@ -3,47 +3,46 @@ import {SubmitCartCommand, SubmitCartState, decide, evolve} from "./SubmitCartCo
 import {describe, it} from "node:test";
 
 
-
 describe('SubmitCart Specification', () => {
 
-        const given = DeciderSpecification.for({
-            decide,
-            evolve,
-            initialState: ()=>({})
-        });
-
-        it('spec: submit cart items without inventory', () => {
-
-            const command: SubmitCartCommand = {
-                type: 'SubmitCart',
-                data: {
-                    aggregateId: "5b1fc325-825a-415d-8e83-51c69cc17f2f"
-                },
-                metadata: {now: new Date()},
-            }
-
-            given([{
-                        type: 'InventoryUpdated',
-                        data: {
-                            inventory: 40,
-productId: "2ab3476c-3108-40ff-81ed-fc0b620b7cf9"
-                        },
-                        
-                    },
-{
-                        type: 'ItemAdded',
-                        data: {
-                            aggregateId: "73eb290a-8c2f-4231-8110-1238b3932b0f",
-description: "0238e139-677b-4700-a0ba-e1a7449fcd46",
-itemId: "7e95a5b5-031e-4dee-b902-3b1210f07f2c",
-name: "1a176bfb-645b-40e5-891b-839b1c7ce0ac",
-price: 30.511301376136224,
-productId: "a15793a0-87b0-4ce1-a19d-dfd827e1f165"
-                        },
-                        
-                    }])
-                .when(command)
-                .thenThrows()
-        });
-
+    const given = DeciderSpecification.for({
+        decide,
+        evolve,
+        initialState: () => ({})
     });
+
+    it('spec: submit cart items without inventory', () => {
+
+        const command: SubmitCartCommand = {
+            type: 'SubmitCart',
+            data: {
+                aggregateId: "40a64a11-50c3-43ad-9821-f85b70b2600a"
+            },
+            metadata: {now: new Date()},
+        }
+
+        given([{
+            type: 'InventoryUpdated',
+            data: {
+                inventory: 677,
+                productId: "1d7a28ed-c567-45ed-b137-9c8aca1edd7d"
+            },
+            metadata: {}
+        },
+            {
+                type: 'ItemAdded',
+                data: {
+                    aggregateId: "f13a97ee-8b4e-4a9d-b494-114c065339e6",
+                    description: "17c327fe-6f07-4406-aaf9-97004025dace",
+                    itemId: "651e7f23-501a-4878-9444-9ff3f02007fb",
+                    name: "64efcc7b-aee4-47be-85a3-256641b9b5d7",
+                    price: 341.61616179284704,
+                    productId: "5e16941b-b4c4-4dc2-b2bf-65c0fc3033a0"
+                },
+                metadata: {}
+            }])
+            .when(command)
+            .thenThrows()
+    });
+
+});

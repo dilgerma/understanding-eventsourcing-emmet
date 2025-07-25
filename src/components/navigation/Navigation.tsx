@@ -35,10 +35,10 @@ export const Navigation = () => {
             <div className={`navbar-menu ${isMenuActive ? 'is-active' : ''}`}>
                 <div className="navbar-start">
                     <Link href="/screen" className="navbar-item">
-                                            Screen
-                                        </Link>,<Link href="/title" className="navbar-item">
-                                            Title
-                                        </Link>
+                        Screen
+                    </Link>,<Link href="/title" className="navbar-item">
+                    Title
+                </Link>
                 </div>
             </div>
         </nav>

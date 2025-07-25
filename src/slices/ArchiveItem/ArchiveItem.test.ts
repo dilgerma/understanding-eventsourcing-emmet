@@ -3,56 +3,56 @@ import {ArchiveItemCommand, ArchiveItemState, decide, evolve} from "./ArchiveIte
 import {describe, it} from "node:test";
 
 
-
 describe('ArchiveItem Specification', () => {
 
-        const given = DeciderSpecification.for({
-            decide,
-            evolve,
-            initialState: ()=>({})
-        });
-
-        it('spec: Archive Item', () => {
-
-            const command: ArchiveItemCommand = {
-                type: 'ArchiveItem',
-                data: {
-                    aggregateId: "b5d153ce-c65b-431b-8165-9c3d286616bc",
-itemId: "2fe96c98-400a-4817-b385-9ab972b68666",
-productId: "eca7f57f-e547-428e-a645-4bf69b8688ce"
-                },
-                metadata: {now: new Date()},
-            }
-
-            given([{
-                        type: 'PriceChanged',
-                        data: {
-                            productId: "06e062fe-bde7-4069-b063-1fe7f7d769a5",
-price: 863.1549167765944
-                        },
-                        
-                    },
-{
-                        type: 'ItemAdded',
-                        data: {
-                            aggregateId: "5609756a-140a-48c6-9bf4-333c3a76239d",
-description: "17c5ad63-8efe-4d12-9b98-9f3fe208382f",
-itemId: "0200c68a-a3f6-4adf-99c8-78ca36f3f565",
-name: "929bd141-9b4b-4055-9d73-ea467d911b82",
-price: 333.28699080895194,
-productId: "ff855406-609e-4346-9cce-1ea64d3fca70"
-                        },
-                        
-                    }])
-                .when(command)
-                .then([{
-                        type: 'ItemArchived',
-                        data: {
-                            			aggregateId:command.data.aggregateId,
-			productId:command.data.productId,
-			itemId:command.data.itemId
-                        },
-                    }])
-        });
-
+    const given = DeciderSpecification.for({
+        decide,
+        evolve,
+        initialState: () => ({})
     });
+
+    it('spec: Archive Item', () => {
+
+        const command: ArchiveItemCommand = {
+            type: 'ArchiveItem',
+            data: {
+                aggregateId: "1ff4b2df-360f-4b59-96c8-ec6b0a95a68b",
+                itemId: "8f46640f-1e8b-4a7e-9909-48690a72e930",
+                productId: "e9e99eeb-2cd1-43d0-a33c-a0c29b7ce879"
+            },
+            metadata: {now: new Date()},
+        }
+
+        given([{
+            type: 'PriceChanged',
+            data: {
+                productId: "fcd017c5-456f-47c3-990e-89c8bf530e29",
+                price: 341.3028820651456
+            },
+            metadata: {}
+        },
+            {
+                type: 'ItemAdded',
+                data: {
+                    aggregateId: "5b8ff3a4-6de5-4833-8a13-c7936b31c725",
+                    description: "58ee121b-af6c-4fae-9cc2-65e260ffd15b",
+                    itemId: "55132380-0c20-4b2b-8711-c0c35da26a39",
+                    name: "fc11b960-893c-4f29-ae21-077c9290e33c",
+                    price: 919.6755629597708,
+                    productId: "c81b696b-4a02-4434-a1df-13cef75685ce"
+                },
+                metadata: {}
+            }])
+            .when(command)
+            .then([{
+                type: 'ItemArchived',
+                data: {
+                    aggregateId: command.data.aggregateId,
+                    productId: command.data.productId,
+                    itemId: command.data.itemId
+                },
+                metadata: {}
+            }])
+    });
+
+});

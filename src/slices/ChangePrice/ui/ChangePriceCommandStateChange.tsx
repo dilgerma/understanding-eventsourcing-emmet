@@ -16,7 +16,7 @@ export const ChangePriceCommandComponent = () => {
         {errorMode ? <div className={"notification is-danger"}>Error in Command-Processing<br/>{error}</div> :
             <span/>}
         {success ? <div className={"notification is-info"}>Command Processed successfully<br/></div> :
-                <span/>}
+            <span/>}
 
         <h3>ChangePriceCommand</h3>
         <div>
@@ -32,7 +32,7 @@ export const ChangePriceCommandComponent = () => {
                     credentials: 'include',
                     body: JSON.stringify(command.data)
                 })
-                  .then((response)=>{
+                    .then((response) => {
                         if (response.status === 200) {
                             setSuccess(true)
                         } else {
