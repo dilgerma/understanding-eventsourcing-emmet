@@ -64,6 +64,9 @@ export const decide = (
             name: command.data.name,
             price: command.data.price,
             productId: command.data.productId
+        },metadata:{
+            correlationId:"1",
+            tenant: "mueller"
         }
     }]
 };

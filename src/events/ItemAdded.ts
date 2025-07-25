@@ -7,4 +7,7 @@ export type ItemAdded = Event<'ItemAdded', {
     name: string,
     price: number,
     productId: string,
+}, {
+    correlationId?: string,
+    tenant?: string
 }>;

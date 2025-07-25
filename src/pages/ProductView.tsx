@@ -3,7 +3,7 @@ import {commonGetServerSideProps} from "../supabase/ProtectedPageProps";
 import {GetServerSidePropsContext} from "next";
 
 
-export default function ProductView(props: any) {
+export default function Title(props: any) {
     return <TitleComponent/>
 }
 
