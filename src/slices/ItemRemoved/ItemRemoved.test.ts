@@ -16,9 +16,9 @@ describe('ItemRemoved Specification', () => {
         const command: RemoveItemCommand = {
             type: 'RemoveItem',
             data: {
-                aggregateId: "70f04f43-3eb8-4c75-843b-c9b7ac6c87c8",
-                itemId: "80c19b57-ba46-450b-8d7e-1fa186dc925c",
-                productId: "49182329-5d4d-467c-8825-92655afd4acd"
+                aggregateId: "6db4b24d-30ed-4e88-9d73-e7162207327a",
+                itemId: "e82d8f89-3303-4239-87e9-006d2f3fd527",
+                productId: "e3407eee-26e8-4cb8-aa31-d10c9cf0f809"
             },
             metadata: {now: new Date()},
         }

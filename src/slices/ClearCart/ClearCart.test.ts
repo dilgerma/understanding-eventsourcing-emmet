@@ -16,7 +16,7 @@ describe('ClearCart Specification', () => {
         const command: ClearCartCommand = {
             type: 'ClearCart',
             data: {
-                aggregateId: "6f5df778-c5f0-4521-aba7-e70199009313"
+                aggregateId: "4f77f24d-7a20-48e8-9580-56f983f159ea"
             },
             metadata: {now: new Date()},
         }
@@ -24,12 +24,12 @@ describe('ClearCart Specification', () => {
         given([{
             type: 'ItemAdded',
             data: {
-                aggregateId: "1465a457-e72e-4bb4-985e-21fe5a7083da",
-                description: "d36d7170-2d1d-4d58-9c83-53d56290946d",
-                itemId: "66131554-bc2b-4619-b723-4b35ddf6d9f8",
-                name: "7718b9dc-6a23-44a5-8565-9036edba4bc4",
-                price: 271.1610492896344,
-                productId: "fab20ce2-deeb-4b31-8e66-411f22091af8"
+                aggregateId: "19ffdaa6-c0b8-4270-9958-ebc05d58f43b",
+                description: "c193406f-0af4-4f6c-872d-29363127fa8d",
+                itemId: "f729ad8a-ad2c-4da0-acde-124926dd2679",
+                name: "150c7b67-c29b-41c7-af69-3eb642185ea8",
+                price: 494.6287737164241,
+                productId: "8bdd93b9-b034-4f11-975d-ccc65a826aed"
             },
             metadata: {}
         }])

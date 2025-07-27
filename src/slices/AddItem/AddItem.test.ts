@@ -16,12 +16,12 @@ describe('AddItem Specification', () => {
         const command: AddItemCommand = {
             type: 'AddItem',
             data: {
-                aggregateId: "8ba5517e-d1fc-42d0-98d2-47dc149ac4ad",
-                description: "d53ee0c1-527c-4092-93e7-f15b0faccdee",
-                price: 778.2756352441495,
-                itemId: "126f3f5d-7168-4df8-865d-649f16bb1ae6",
-                name: "b2b66cbf-7e7f-4065-b999-e074260640c6",
-                productId: "8eb5f88f-6908-4190-96cf-dc07010e551a"
+                aggregateId: "747287fe-99b0-4d83-ab08-5c99064919b5",
+                description: "6008f2f6-d102-442a-adf1-bf081fdf23fb",
+                price: 625.6024742231267,
+                itemId: "088f6233-4814-458c-a236-b89d3643483b",
+                name: "c27c0bad-396d-4605-a9b1-116c9cd64c72",
+                productId: "2edcb8e1-3c98-4be7-882c-d292accb138a"
             },
             metadata: {now: new Date()},
         }
@@ -29,36 +29,36 @@ describe('AddItem Specification', () => {
         given([{
             type: 'ItemAdded',
             data: {
-                aggregateId: "12896e34-e46d-443e-be53-f21f848986cb",
-                description: "59e8f220-c396-4add-8e85-92da408023a1",
-                itemId: "3d4003a7-f016-4b91-b1f8-000f5cd7e9d4",
-                name: "6938bf15-dac2-42da-8ce2-0a5304e801c7",
-                price: 949.6402082920357,
-                productId: "6823c039-9705-45c4-9ab1-0939d39e247f"
+                aggregateId: "e1f59b6f-1b49-441a-a4df-02487d63ca52",
+                description: "f3f06a33-88bf-426b-ab9f-18917989ee01",
+                itemId: "ad514c4f-1b31-4add-8b8f-f71b8c808ef8",
+                name: "819391d8-0147-4843-bcac-2d285e5a02af",
+                price: 663.7580659367235,
+                productId: "aa2c3afc-b252-45b7-a16f-5921ae30e52c"
             },
             metadata: {}
         },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "63fed741-cbc5-4849-9cb1-f3238890483e",
-                    description: "1187eb80-9c2c-4007-b2e1-824e06957a0c",
-                    itemId: "40400595-370a-4a8d-9cad-809a156c63c8",
-                    name: "86d6c7d3-28b8-43dd-bcde-59dd633ca031",
-                    price: 500.12644575121936,
-                    productId: "56b27bdc-2eb3-41e9-9317-f02ebbf2d1ea"
+                    aggregateId: "dc7ba0b3-f4c3-4d02-ba40-bb42d4121426",
+                    description: "6d15c14d-4fce-48cf-a2c7-913accb99b06",
+                    itemId: "5eab9dcb-788d-44ba-a2e0-dea4fa43de61",
+                    name: "4d8542d2-078c-4722-b062-7d1bf39d7f44",
+                    price: 850.88048134684,
+                    productId: "9e67e910-432f-402e-b8ff-fc826d9e169f"
                 },
                 metadata: {}
             },
             {
                 type: 'ItemAdded',
                 data: {
-                    aggregateId: "bbaf0fb9-f6df-4522-8dec-5b1e11a8caa3",
-                    description: "4a240401-1b73-4432-b168-4ff9d1940d7a",
-                    itemId: "dbe9e21f-d43e-4821-a046-7317a5e9c934",
-                    name: "cb4c7afb-9ce8-4a13-8c0e-bbc1b0e41304",
-                    price: 295.91241144774693,
-                    productId: "0a2856f3-4536-48a0-a71a-729f048b0f95"
+                    aggregateId: "21d25fc4-935a-4534-973d-de0aee27e94a",
+                    description: "754db9cc-b46e-4304-aab7-97875e72b229",
+                    itemId: "2fcfc04f-6c4d-4d60-9d76-f02101507148",
+                    name: "647f9ad7-40e3-465b-98ac-d1334f904ae5",
+                    price: 435.19331484217895,
+                    productId: "5d4932fb-9cb9-4a15-876f-d90ae7b7b17a"
                 },
                 metadata: {}
             }])
@@ -70,12 +70,12 @@ describe('AddItem Specification', () => {
         const command: AddItemCommand = {
             type: 'AddItem',
             data: {
-                aggregateId: "86c6d6c3-b569-465a-b92d-196299646630",
-                description: "c15ed334-697a-4fa1-ad3d-e93a7867ee3f",
-                price: 210.02554802723995,
-                itemId: "6c4db0ed-7435-4411-b379-98a3bbc425cc",
-                name: "8463bf18-aade-43c3-9122-061efddfdc04",
-                productId: "df7a219b-3235-4be3-9c6a-2101aca16735"
+                aggregateId: "3f655ae3-0b89-4a2f-b33f-9376becb43a1",
+                description: "52a72fbc-5851-4b84-a410-eb4e20c45a69",
+                price: 40.35934663124596,
+                itemId: "6217c856-95bd-401e-85ee-d70c5292d1fd",
+                name: "fdc63646-4999-471e-8206-f3bb4ec3f195",
+                productId: "6a54f5a1-232a-4fee-806d-35826afba7eb"
             },
             metadata: {now: new Date()},
         }

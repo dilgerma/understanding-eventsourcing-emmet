@@ -24,12 +24,12 @@ describe('CartItems Specification', () => {
     });
 
     it('spec: cart items', async () => {
-        const aggregateId = "fb9e9f20-4e50-4111-a8d5-85d49261d7f7"
-        const description = "ea7d51c8-17a4-4f2a-b77a-587e37757272"
-        const itemId = "5f305092-f3ff-4eb4-9140-4c1c16d6f227"
-        const name = "6e74ba09-ad0a-458e-b8c9-0f65c9fb98c0"
-        const price = 456.47717028508737
-        const productId = "a0da3706-184b-4c9c-9363-576243ffcd3f"
+        const aggregateId = "a589935d-f7e8-4576-bd3b-512204db7f5d"
+        const description = "a3c7c852-228d-4258-94c8-d9d3b154693e"
+        const itemId = "cae92152-c156-41ab-9980-ffad1ac3a312"
+        const name = "5b784b90-163b-46af-9845-292b99311564"
+        const price = 69.0708703236509
+        const productId = "4f64955d-153f-469c-a5c4-51af4ca833bb"
         await given([{
             type: 'ItemAdded',
             data: {
@@ -40,7 +40,7 @@ describe('CartItems Specification', () => {
                 price: price,
                 productId: productId
             },
-            metadata: {streamName: 'c5c22011-a34f-41c5-80cb-dc79bf00a328'}
+            metadata: {streamName: 'cbe7b9cb-1a25-4b8d-be6d-cf187286e454'}
         },
             {
                 type: 'ItemAdded',
@@ -52,7 +52,7 @@ describe('CartItems Specification', () => {
                     price: price,
                     productId: productId
                 },
-                metadata: {streamName: 'c5c22011-a34f-41c5-80cb-dc79bf00a328'}
+                metadata: {streamName: 'cbe7b9cb-1a25-4b8d-be6d-cf187286e454'}
             }])
             .when([])
             .then(
@@ -60,7 +60,7 @@ describe('CartItems Specification', () => {
                     .fromCollection<CartItemsReadModel>(
                         "CartItems-collection",
                     )
-                    .withId("c5c22011-a34f-41c5-80cb-dc79bf00a328")
+                    .withId("cbe7b9cb-1a25-4b8d-be6d-cf187286e454")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
