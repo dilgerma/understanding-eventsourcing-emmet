@@ -1,89 +1,103 @@
-import {pongoSingleStreamProjection} from '@event-driven-io/emmett-postgresql';
-import {CartSubmitted} from '../../events/CartSubmitted';
-import {CartCleared} from '../../events/CartCleared';
-import {ItemRemoved} from '../../events/ItemRemoved';
-import {ItemAdded} from '../../events/ItemAdded';
-import {CartPublished} from '../../events/CartPublished';
-import {ProcessorTodoItem} from "../../process/process";
-
+import { pongoSingleStreamProjection } from '@event-driven-io/emmett-postgresql';
+import { CartPublished } from '../../events/CartPublished';
+import { CartSubmitted } from '../../events/CartSubmitted';
+import { CartCleared } from '../../events/CartCleared';
+import { ItemRemoved } from '../../events/ItemRemoved';
+import { ItemAdded } from '../../events/ItemAdded';
+import { ProcessorTodoItem } from "../../process/process";
 
 export type CartsToBePublishedReadModelItem = {
-    aggregateId?: string,
-    totalPrice?: number,
-    orderedProducts?: Array<any>,
-}
+    aggregateId?: string;
+    totalPrice?: number;
+    orderedProducts?: Array<{ productId: string; price: number }>;
+};
 
 export type CartsToBePublishedReadModel = {
-    data: CartsToBePublishedReadModelItem,
-    status?: string
-} & Partial<ProcessorTodoItem>
-
+    data: CartsToBePublishedReadModelItem;
+    status?: string;
+} & Partial<ProcessorTodoItem>;
 
 const evolve = (
     document: CartsToBePublishedReadModel | null,
-    {type, data: event}: CartSubmitted | CartCleared | ItemRemoved | ItemAdded | CartPublished
+    { type, data: event }: CartPublished | CartSubmitted | CartCleared | ItemRemoved | ItemAdded
 ): CartsToBePublishedReadModel | null => {
-    const state: CartsToBePublishedReadModel = {...document, data: {...document?.data}};
-    switch (type) {
-        /*
-        AI-TODO start: implement according to the specifications provided.
-        Stick to the specification, don´t add new fields, which are not specified.
-        Remove the TODO Comment afterwards.
+    const existing = document ?? {
+        data: {
+            aggregateId: event.aggregateId,
+            orderedProducts: [],
+            totalPrice: 0,
+        }
+    };
+    const products = existing.data.orderedProducts ?? [];
 
-        AI-TODO end
-        */
-        case "CartSubmitted":
+    switch (type) {
+        case "ItemAdded": {
+            const updated = [...products, { productId: event.productId, price: event.price }];
             return {
-                ...document,
+                ...existing,
                 data: {
                     aggregateId: event.aggregateId,
+                    orderedProducts: updated,
+                    totalPrice: updated.reduce((sum, p) => sum + p.price, 0),
                 },
-                status: "OPEN"
-            }
+                status: existing.status, // unchanged
+            };
+        }
+
+        case "ItemRemoved": {
+            const updated = products.filter((p) => p.productId !== event.productId);
+            return {
+                ...existing,
+                data: {
+                    aggregateId: event.aggregateId,
+                    orderedProducts: updated,
+                    totalPrice: updated.reduce((sum, p) => sum + p.price, 0),
+                },
+                status: existing.status, // unchanged
+            };
+        }
+
         case "CartCleared":
             return {
-                ...document,
+                ...existing,
                 data: {
                     aggregateId: event.aggregateId,
+                    orderedProducts: [],
+                    totalPrice: 0,
                 },
-                status: "OPEN"
-            }
-        case "ItemRemoved":
+                status: existing.status, // unchanged
+            };
+
+        case "CartSubmitted":
             return {
-                ...document,
+                ...existing,
                 data: {
+                    ...existing.data,
                     aggregateId: event.aggregateId,
                 },
-                status: "OPEN"
-            }
-        case "ItemAdded":
-            return {
-                ...document,
-                data: {
-                    aggregateId: event.aggregateId,
-                    totalPrice: event.price,
-                },
-                status: "OPEN"
-            }
+                status: "OPEN",
+            };
+
         case "CartPublished":
             return {
-                ...document,
+                ...existing,
                 data: {
                     aggregateId: event.aggregateId,
                     orderedProducts: event.orderedProducts,
                     totalPrice: event.totalPrice,
                 },
-                status: "OPEN"
-            }
+                status: "CLOSED",
+            };
+
         default:
-            return {...state};
+            return existing;
     }
 };
 
 const collectionName = 'cartstobepublished-collection';
 
 export const CartsToBePublishedProjection = pongoSingleStreamProjection({
-    canHandle: ["CartSubmitted", "CartCleared", "ItemRemoved", "ItemAdded", "CartPublished"],
+    canHandle: ["CartPublished", "CartSubmitted", "CartCleared", "ItemRemoved", "ItemAdded"],
     collectionName,
     evolve,
 });

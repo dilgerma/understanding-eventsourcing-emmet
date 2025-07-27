@@ -1,9 +1,8 @@
-import {Router, Request, Response} from 'express';
-import {loadPongoClient} from "../../common/loadPongoClient";
+import {Request, Response, Router} from 'express';
 import {ItemsToBeArchivedReadModel} from "./ItemsToBeArchivedProjection";
-import {on, WebApiSetup} from "@event-driven-io/emmett-expressjs";
-
-const router = Router();
+import {WebApiSetup} from "@event-driven-io/emmett-expressjs";
+import {createServiceClient} from "../../supabase/api";
+import {readmodel} from "../../core/readmodel";
 
 export const api =
     (
@@ -13,24 +12,31 @@ export const api =
             router.get('/api/query/itemstobearchived-collection', async (req: Request, res: Response) => {
                 // requireUser in your original code seems to expect some kind of context,
                 // adapt it to Express req if needed, or pass false as in your original code.
+                    const collection = "itemstobearchived-collection"
                 try {
-                    const id = req.query._id;
-                    const client = loadPongoClient();
-                    const db = client.db();
-                    const collection = db.collection<ItemsToBeArchivedReadModel>('itemstobearchived-collection');
 
-                    const projection = await collection.findOne({_id: id});
+                    const status = req.query.status?.toString();
+                    const limit = Number(req.query._limit ?? -1)
+                    if (!status) throw "no status provided"
+
+                    const supabase = createServiceClient()
+
+
+                    const data: ItemsToBeArchivedReadModel[] | null = await readmodel(collection, supabase)
+                        .findAll<ItemsToBeArchivedReadModel>({status: status},
+                            (query) => limit !== -1 ? query.limit(limit) : query)
+
 
                     // Serialize, handling bigint properly
                     const sanitized = JSON.parse(
-                        JSON.stringify(projection, (key, value) =>
+                        JSON.stringify(data || [], (key, value) =>
                             typeof value === 'bigint' ? value.toString() : value
                         )
                     );
 
                     return res.status(200).json(sanitized);
                 } catch (err) {
-                    console.error(err);
+                    console.error(`Error processing request for collection ${collection} with Error: ${err}`);
                     return res.status(500).json({ok: false, error: 'Server error'});
                 }
             });

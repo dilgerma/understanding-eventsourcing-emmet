@@ -77,6 +77,8 @@
           "elementType": "EVENT"
         }
       ],
+      "listElement": true,
+      "todoList": true,
       "apiEndpoint": "",
       "service": null,
       "createsAggregate": false,

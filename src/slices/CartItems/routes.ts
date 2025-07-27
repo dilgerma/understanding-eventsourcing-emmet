@@ -1,9 +1,10 @@
-import {Router, Request, Response} from 'express';
-import {loadPongoClient} from "../../common/loadPongoClient";
-import {CartItemsReadModel} from "./CartItemsProjection";
-import {on, WebApiSetup} from "@event-driven-io/emmett-expressjs";
 
-const router = Router();
+import {Request, Response, Router} from 'express';
+import {CartItemsReadModel} from "./CartItemsProjection";
+import {WebApiSetup} from "@event-driven-io/emmett-expressjs";
+import createClient, {createServiceClient} from "../../supabase/api";
+import {readmodel} from "../../core/readmodel";
+import {requireUser} from "../../supabase/requireUser";
 
 export const api =
     (
@@ -14,24 +15,29 @@ export const api =
                 // requireUser in your original code seems to expect some kind of context,
                 // adapt it to Express req if needed, or pass false as in your original code.
                 try {
-                    const id = req.query._id;
-                    const client = loadPongoClient();
-                    const db = client.db();
-                    const collection = db.collection<CartItemsReadModel>('cartitems-collection');
 
-                    const projection = await collection.findOne({_id: id});
+                    const user = await requireUser(req, res, false);
+                    console.log(JSON.stringify(user))
+                   
+           const id = req.query._id?.toString();
+           if(!id) throw "no id provided"
 
-                    // Serialize, handling bigint properly
-                    const sanitized = JSON.parse(
-                        JSON.stringify(projection, (key, value) =>
-                            typeof value === 'bigint' ? value.toString() : value
-                        )
-                    );
+           const supabase = createClient(req, res)
+           const collection = "cartitems-collection"
+
+           const data:CartItemsReadModel|null = await readmodel(collection, supabase).findById<CartItemsReadModel>(id)
+
+                   // Serialize, handling bigint properly
+                   const sanitized = JSON.parse(
+                       JSON.stringify(data || [], (key, value) =>
+                           typeof value === 'bigint' ? value.toString() : value
+                       )
+                   );
 
                     return res.status(200).json(sanitized);
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ok: false, error: 'Server error'});
+                    return res.status(500).json({ ok: false, error: 'Server error' });
                 }
             });
 

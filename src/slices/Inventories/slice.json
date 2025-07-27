@@ -51,7 +51,7 @@
         {
           "id": "3458764620568352101",
           "type": "OUTBOUND",
-          "title": "title",
+          "title": "Cart View",
           "elementType": "SCREEN"
         },
         {
@@ -80,7 +80,7 @@
       "modelContext": "Cart",
       "context": "INTERNAL",
       "slice": "slice: inventories",
-      "title": "title",
+      "title": "Cart View",
       "fields": [
         {
           "name": "inventory",
@@ -115,7 +115,10 @@
           "elementType": "READMODEL"
         }
       ],
+      "listElement": false,
+      "todoList": false,
       "apiEndpoint": "",
+      "service": null,
       "createsAggregate": false,
       "triggers": [],
       "sketched": false,

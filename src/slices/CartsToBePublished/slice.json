@@ -66,6 +66,12 @@
           "elementType": "AUTOMATION"
         },
         {
+          "id": "3458764620568353726",
+          "type": "INBOUND",
+          "title": "Cart Published",
+          "elementType": "EVENT"
+        },
+        {
           "id": "3458764620568353695",
           "type": "INBOUND",
           "title": "Cart submitted",
@@ -87,12 +93,6 @@
           "id": "3458764620568353692",
           "type": "INBOUND",
           "title": "Item Added",
-          "elementType": "EVENT"
-        },
-        {
-          "id": "3458764620568353726",
-          "type": "INBOUND",
-          "title": "Cart Published",
           "elementType": "EVENT"
         }
       ],

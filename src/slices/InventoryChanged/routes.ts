@@ -1,17 +1,17 @@
-import {Router, Request, Response} from 'express';
-import {ImportInventoryCommand, handleImportInventory} from './ImportInventoryCommand';
+import { Router, Request, Response } from 'express';
+import { ImportInventoryCommand, handleImportInventory } from './ImportInventoryCommand';
 import {requireUser} from "../../supabase/requireUser";
 import {on, WebApiSetup} from "@event-driven-io/emmett-expressjs";
 import {assertNotEmptyString} from "@event-driven-io/emmett";
 import {assertNotEmpty} from "../../components/util/assertions";
 
 export type ImportInventoryRequestPayload = {
-    inventory?: number,
-    productId?: string
+    inventory?:number,
+productId?:string
 }
 
 export type ImportInventoryRequest = Request<
-    Partial<{ id: string }>,
+    Partial<{ id:string }>,
     unknown,
     Partial<ImportInventoryRequestPayload>
 >;
@@ -31,10 +31,10 @@ export const api =
                 const causation_id = req.params.id
 
                 try {
-                    const command: ImportInventoryCommand = {
+                    const command:ImportInventoryCommand = {
                         data: {
-                            inventory: assertNotEmpty(req.body.inventory),
-                            productId: assertNotEmpty(req.body.productId)
+                            			inventory:assertNotEmpty(req.body.inventory),
+			productId:assertNotEmpty(req.body.productId)
                             //amount: req.body.amount,
                         },
                         metadata: {
@@ -49,14 +49,14 @@ export const api =
                     res.set("correlation_id", correlation_id)
                     res.set("causation_id", causation_id)
 
-                    return res.status(200).json({
+                  return res.status(200).json({
                         ok: true,
                         next_expected_stream_version: result.nextExpectedStreamVersion?.toString(),
-                        last_event_global_position: result.lastEventGlobalPosition?.toString()
+                        last_event_global_position:result.lastEventGlobalPosition?.toString()
                     });
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ok: false, error: 'Server error'});
+                    return res.status(500).json({ ok: false, error: 'Server error' });
                 }
             });
         };

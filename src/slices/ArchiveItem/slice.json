@@ -409,14 +409,14 @@
             {
               "name": "price",
               "type": "Decimal",
+              "schema": "",
               "example": "",
               "mapping": "",
               "optional": false,
               "generated": false,
               "cardinality": "Single",
               "idAttribute": false,
-              "excludeFromApi": false,
-              "schema": ""
+              "excludeFromApi": false
             },
             {
               "name": "productId",

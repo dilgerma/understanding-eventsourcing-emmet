@@ -8,14 +8,14 @@ export type ProcessorTodoItem = {
 }
 
 export type ProcessorConfig = {
-    schedule: string,
-    endpoint: string,
+    schedule:string,
+    endpoint:string,
     query?: Record<string, string>
 }
 
-export const startProcessor = <T>(config: ProcessorConfig, handler: (item: T & ProcessorTodoItem) => void) => {
-    cron.schedule(config.schedule, async () => {
-        const data = await fetchData(parseQueryEndpoint(config.endpoint, config.query ? config.query : {"status": "OPEN"}))
+export const startProcessor = <T>(config:ProcessorConfig, handler: (item:T&ProcessorTodoItem)=>void) =>{
+    cron.schedule(config.schedule,async () => {
+        const data = await fetchData(parseQueryEndpoint(config.endpoint, config.query ? config.query : {"status": "OPEN", "_limit":"1"}))
         if (data?.length > 0) {
             handler(data[0]);
         } else {

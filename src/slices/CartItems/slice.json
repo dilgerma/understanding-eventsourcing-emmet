@@ -210,14 +210,14 @@
         {
           "name": "price",
           "type": "Decimal",
+          "schema": "",
           "example": "",
           "mapping": "",
           "optional": false,
           "generated": false,
           "cardinality": "Single",
           "idAttribute": false,
-          "excludeFromApi": false,
-          "schema": ""
+          "excludeFromApi": false
         },
         {
           "name": "productId",
@@ -321,14 +321,14 @@
         {
           "name": "price",
           "type": "Decimal",
+          "schema": "",
           "example": "",
           "mapping": "",
           "optional": false,
           "generated": false,
           "cardinality": "Single",
           "idAttribute": false,
-          "excludeFromApi": false,
-          "schema": ""
+          "excludeFromApi": false
         },
         {
           "name": "productId",
@@ -353,19 +353,19 @@
         {
           "id": "3458764620568352171",
           "type": "OUTBOUND",
-          "title": "title",
+          "title": "Cart View",
           "elementType": "SCREEN"
         },
         {
           "id": "3458764620568352152",
           "type": "OUTBOUND",
-          "title": "title",
+          "title": "Cart View",
           "elementType": "SCREEN"
         },
         {
           "id": "3458764620568352090",
           "type": "OUTBOUND",
-          "title": "title",
+          "title": "Cart View",
           "elementType": "SCREEN"
         },
         {
@@ -413,7 +413,7 @@
       "modelContext": "Cart",
       "context": "INTERNAL",
       "slice": "slice: cart items",
-      "title": "title",
+      "title": "Cart View",
       "fields": [
         {
           "name": "name",
@@ -463,6 +463,8 @@
           "elementType": "READMODEL"
         }
       ],
+      "listElement": false,
+      "todoList": false,
       "apiEndpoint": "",
       "service": null,
       "createsAggregate": false,
@@ -538,14 +540,14 @@
             {
               "name": "price",
               "type": "Decimal",
+              "schema": "",
               "example": "",
               "mapping": "",
               "optional": false,
               "generated": false,
               "cardinality": "Single",
               "idAttribute": false,
-              "excludeFromApi": false,
-              "schema": ""
+              "excludeFromApi": false
             },
             {
               "name": "productId",
@@ -617,14 +619,14 @@
             {
               "name": "price",
               "type": "Decimal",
+              "schema": "",
               "example": "",
               "mapping": "",
               "optional": false,
               "generated": false,
               "cardinality": "Single",
               "idAttribute": false,
-              "excludeFromApi": false,
-              "schema": ""
+              "excludeFromApi": false
             },
             {
               "name": "productId",
@@ -688,14 +690,14 @@
             {
               "name": "price",
               "type": "Decimal",
+              "schema": "",
               "example": "",
               "mapping": "",
               "optional": false,
               "generated": false,
               "cardinality": "Single",
               "idAttribute": false,
-              "excludeFromApi": false,
-              "schema": ""
+              "excludeFromApi": false
             },
             {
               "name": "productId",
@@ -757,14 +759,14 @@
             {
               "name": "price",
               "type": "Decimal",
+              "schema": "",
               "example": "",
               "mapping": "",
               "optional": false,
               "generated": false,
               "cardinality": "Single",
               "idAttribute": false,
-              "excludeFromApi": false,
-              "schema": ""
+              "excludeFromApi": false
             },
             {
               "name": "productId",

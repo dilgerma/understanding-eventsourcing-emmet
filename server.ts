@@ -46,10 +46,10 @@ app.prepare().then(async () => {
 
     const express = require('express');
     const app = express();
-    app.post("/internal/replay/:slice/:projectionName", async (req: Request, resp: Response) => {
+    app.post("/internal/replay/:slice/:projectionName", async (req:Request, resp:Response)=>{
         const {slice, projectionName} = req.params
         await replayProjection(slice, projectionName);
-        return resp.status(200).json({status: 'ok'});
+        return resp.status(200).json({ status: 'ok' });
     })
 
 
@@ -83,5 +83,12 @@ app.prepare().then(async () => {
     const port = parseInt(process.env.PORT || '3000', 10);
     console.log(`> Ready on port ${port}`);
     startAPI(app, {port: port});
+
+    process.on('unhandledRejection', (reason, promise) => {
+        console.error('⛔ Unhandled Rejection:', reason);
+        if (reason instanceof Error && reason.stack) {
+            console.error('Stack trace:\n', reason.stack);
+        }
+    });
 
 });

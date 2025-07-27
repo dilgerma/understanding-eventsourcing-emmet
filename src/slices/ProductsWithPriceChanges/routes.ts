@@ -1,9 +1,9 @@
-import {Router, Request, Response} from 'express';
-import {loadPongoClient} from "../../common/loadPongoClient";
-import {CartsWithProductsReadModel} from "./CartsWithProductsProjection";
-import {on, WebApiSetup} from "@event-driven-io/emmett-expressjs";
 
-const router = Router();
+import {Request, Response, Router} from 'express';
+import {CartsWithProductsReadModel} from "./CartsWithProductsProjection";
+import {WebApiSetup} from "@event-driven-io/emmett-expressjs";
+import {createServiceClient} from "../../supabase/api";
+import {readmodel} from "../../core/readmodel";
 
 export const api =
     (
@@ -14,24 +14,27 @@ export const api =
                 // requireUser in your original code seems to expect some kind of context,
                 // adapt it to Express req if needed, or pass false as in your original code.
                 try {
-                    const id = req.query._id;
-                    const client = loadPongoClient();
-                    const db = client.db();
-                    const collection = db.collection<CartsWithProductsReadModel>('cartswithproducts-collection');
 
-                    const projection = await collection.findOne({_id: id});
+                   
+           const id = req.query._id?.toString();
+           if(!id) throw "no id provided"
 
-                    // Serialize, handling bigint properly
-                    const sanitized = JSON.parse(
-                        JSON.stringify(projection, (key, value) =>
-                            typeof value === 'bigint' ? value.toString() : value
-                        )
-                    );
+           const supabase = createServiceClient()
+           const collection = "cartswithproducts-collection"
+
+           const data:CartsWithProductsReadModel|null = await readmodel(collection, supabase).findById<CartsWithProductsReadModel>(id)
+
+                   // Serialize, handling bigint properly
+                   const sanitized = JSON.parse(
+                       JSON.stringify(data || [], (key, value) =>
+                           typeof value === 'bigint' ? value.toString() : value
+                       )
+                   );
 
                     return res.status(200).json(sanitized);
                 } catch (err) {
                     console.error(err);
-                    return res.status(500).json({ok: false, error: 'Server error'});
+                    return res.status(500).json({ ok: false, error: 'Server error' });
                 }
             });
 

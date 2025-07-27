@@ -9,7 +9,7 @@ import {ItemAdded} from "../../events/ItemAdded"
 
 describe('CartItems Specification', () => {
     let postgres: StartedPostgreSqlContainer;
-    let connectionString: string
+    let connectionString:string
 
     let given: PostgreSQLProjectionSpec<ItemArchived | CartCleared | ItemRemoved | ItemAdded>
 
@@ -23,52 +23,52 @@ describe('CartItems Specification', () => {
         });
     });
 
-    it('spec: cart items', async () => {
-        const aggregateId = "a589935d-f7e8-4576-bd3b-512204db7f5d"
-        const description = "a3c7c852-228d-4258-94c8-d9d3b154693e"
-        const itemId = "cae92152-c156-41ab-9980-ffad1ac3a312"
-        const name = "5b784b90-163b-46af-9845-292b99311564"
-        const price = 69.0708703236509
-        const productId = "4f64955d-153f-469c-a5c4-51af4ca833bb"
+     it('spec: cart items', async () => {
+        const aggregateId = "9a419281-df54-445a-ac00-47bc0bc3f191"
+const description = "b9562f21-c8b8-49a4-91ac-b30f852df789"
+const itemId = "5030e6f9-26c0-4488-8dfc-0a191b03dbc7"
+const name = "77195ee4-6f6e-4e2d-b44c-0f0a30a599cc"
+const price = 392.6530944026176
+const productId = "ef6e50d8-6397-4405-b760-684f38465d90"
         await given([{
-            type: 'ItemAdded',
-            data: {
-                aggregateId: aggregateId,
-                description: description,
-                itemId: itemId,
-                name: name,
-                price: price,
-                productId: productId
-            },
-            metadata: {streamName: 'cbe7b9cb-1a25-4b8d-be6d-cf187286e454'}
-        },
-            {
-                type: 'ItemAdded',
-                data: {
-                    aggregateId: aggregateId,
-                    description: description,
-                    itemId: itemId,
-                    name: name,
-                    price: price,
-                    productId: productId
-                },
-                metadata: {streamName: 'cbe7b9cb-1a25-4b8d-be6d-cf187286e454'}
-            }])
+                        type: 'ItemAdded',
+                        data: {
+                            aggregateId: aggregateId,
+description: description,
+itemId: itemId,
+name: name,
+price: price,
+productId: productId
+                        },
+                        metadata: {streamName: '70db95b4-729b-4ab4-9a21-ffe7904091b8'}
+                    },
+{
+                        type: 'ItemAdded',
+                        data: {
+                            aggregateId: aggregateId,
+description: description,
+itemId: itemId,
+name: name,
+price: price,
+productId: productId
+                        },
+                        metadata: {streamName: '70db95b4-729b-4ab4-9a21-ffe7904091b8'}
+                    }])
             .when([])
             .then(
                 expectPongoDocuments
                     .fromCollection<CartItemsReadModel>(
                         "CartItems-collection",
                     )
-                    .withId("cbe7b9cb-1a25-4b8d-be6d-cf187286e454")
+                    .withId("70db95b4-729b-4ab4-9a21-ffe7904091b8")
                     .toBeEqual({
                         data: [{
                             aggregateId: aggregateId,
-                            itemId: itemId,
-                            name: name,
-                            price: price,
-                            productId: productId
-                        }]
+itemId: itemId,
+name: name,
+price: price,
+productId: productId
+                            }]
                     }),
             );
     });

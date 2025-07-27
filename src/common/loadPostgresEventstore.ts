@@ -8,18 +8,18 @@ import {ItemsToBeArchivedProjection} from "../slices/ItemsToBeArchived/ItemsToBe
 import {InventoriesProjection} from "../slices/Inventories/InventoriesProjection"
 import {CartsToBePublishedProjection} from "../slices/CartsToBePublished/CartsToBePublishedProjection"
 
-export const findEventstore = async () => {
+    export const findEventstore = async () => {
 
 
     return getPostgreSQLEventStore(postgresUrl, {
         projections: projections.inline([
             CartItemsProjection,
-            ProductsWithPriceChangesProjection,
-            CartsWithProductsProjection,
-            ItemsToBeArchivedProjection,
-            InventoriesProjection,
-            CartsToBePublishedProjection
+ProductsWithPriceChangesProjection,
+CartsWithProductsProjection,
+ItemsToBeArchivedProjection,
+InventoriesProjection,
+CartsToBePublishedProjection
         ]),
-    });
+});
 
 }

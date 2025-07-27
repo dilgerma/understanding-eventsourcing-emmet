@@ -34,11 +34,11 @@ export const Navigation = () => {
 
             <div className={`navbar-menu ${isMenuActive ? 'is-active' : ''}`}>
                 <div className="navbar-start">
-                    <Link href="/screen" className="navbar-item">
-                        Screen
-                    </Link>,<Link href="/title" className="navbar-item">
-                    Title
-                </Link>
+                    <Link href="/productview" className="navbar-item">
+                                            ProductView
+                                        </Link>,<Link href="/cartview" className="navbar-item">
+                                            CartView
+                                        </Link>
                 </div>
             </div>
         </nav>

@@ -17,12 +17,17 @@ export const processor = {
             const command: PublishCartCommand = {
                 type: "PublishCart",
                 data: {
-                    aggregateId: item.data.aggregateId!,
-                    orderedProducts: item.data.orderedProducts!,
-                    totalPrice: item.data.totalPrice!
-                }, metadata: {}
+                   			aggregateId:item.data.aggregateId!,
+			orderedProducts:item.data.orderedProducts!,
+			totalPrice:item.data.totalPrice!
+                },metadata: {}
             }
-            await handlePublishCart(command.data[idAttribute], command)
+            const id =  command.data[idAttribute]
+            if (!id) {
+                throw `Cannot process Command ${command.type}. No Id available.`
+            }
+
+            await handlePublishCart(command.data[idAttribute], command);
         })
     }
 }

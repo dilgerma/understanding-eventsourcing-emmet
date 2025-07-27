@@ -3,29 +3,30 @@ import {RemoveItemCommand, RemoveItemState, decide, evolve} from "./RemoveItemCo
 import {describe, it} from "node:test";
 
 
+
 describe('ItemRemoved Specification', () => {
 
-    const given = DeciderSpecification.for({
-        decide,
-        evolve,
-        initialState: () => ({})
+        const given = DeciderSpecification.for({
+            decide,
+            evolve,
+            initialState: ()=>({})
+        });
+
+        it('spec: Item removed', () => {
+
+            const command: RemoveItemCommand = {
+                type: 'RemoveItem',
+                data: {
+                    aggregateId: "26578883-74f6-4c55-97d6-e42f52d810ce",
+itemId: "6d85a167-4d55-4844-a62b-f735a580f485",
+productId: "2b66a45b-0232-4e37-9f69-082cb98976c1"
+                },
+                metadata: {now: new Date()},
+            }
+
+            given([])
+                .when(command)
+                .thenThrows()
+        });
+
     });
-
-    it('spec: Item removed', () => {
-
-        const command: RemoveItemCommand = {
-            type: 'RemoveItem',
-            data: {
-                aggregateId: "6db4b24d-30ed-4e88-9d73-e7162207327a",
-                itemId: "e82d8f89-3303-4239-87e9-006d2f3fd527",
-                productId: "e3407eee-26e8-4cb8-aa31-d10c9cf0f809"
-            },
-            metadata: {now: new Date()},
-        }
-
-        given([])
-            .when(command)
-            .thenThrows()
-    });
-
-});

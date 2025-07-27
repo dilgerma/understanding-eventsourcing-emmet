@@ -1,29 +1,31 @@
-import type {Command} from '@event-driven-io/emmett'
-import {CommandHandler} from '@event-driven-io/emmett';
+import type { Command } from '@event-driven-io/emmett'
+import { CommandHandler } from '@event-driven-io/emmett';
 import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type ImportInventoryCommand = Command<'ImportInventory', {
-    inventory: number,
-    productId: string
-},
-    {
-        correlation_id?: string,
-        causation_id?: string,
-        now?: Date,
-        streamName?: string,
-    }>;
+          inventory: number,
+  productId: string
+        },
+        {
+            correlation_id?:string,
+causation_id?:string,
+now?:Date,
+streamName?:string,
+        }>;
 
 // TODO-AI keep attributes in state optional
-export type ImportInventoryState = {}
+export type ImportInventoryState = {
+}
 
-export const ImportInventoryInitialState = (): ImportInventoryState => ({});
+export const ImportInventoryInitialState = (): ImportInventoryState => ({
+});
 
 export const evolve = (
     state: ImportInventoryState,
     event: CartEvents,
 ): ImportInventoryState => {
-    const {type, data} = event;
+    const { type, data } = event;
 
     switch (type) {
         // case "..Event":
@@ -43,34 +45,27 @@ Remove the TODO Comment afterwards.
 
 AI-TODO end
 */
-export const decide = (
+    export const decide = (
     command: ImportInventoryCommand,
     state: ImportInventoryState,
 ): CartEvents[] => {
     return [{
         type: "InventoryUpdated",
-        data: {
-            inventory: command.data.inventory,
-            productId: command.data.productId
-        }, metadata: {
-            correlation_id: command.metadata?.correlation_id,
-            causation_id: command.metadata?.causation_id
-        }
-    }]
+            data: {
+        			inventory:command.data.inventory,
+			productId:command.data.productId
+    }, metadata: {
+        correlation_id: command.metadata?.correlation_id,
+        causation_id: command.metadata?.causation_id
+    }}]
 };
 
 
-const ImportInventoryCommandHandler = CommandHandler<ImportInventoryState, CartEvents>({
-    evolve,
-    initialState: ImportInventoryInitialState
-});
+const ImportInventoryCommandHandler = CommandHandler<ImportInventoryState, CartEvents>({evolve,initialState:ImportInventoryInitialState});
 
-export const handleImportInventory = async (id: string, command: ImportInventoryCommand) => {
+export const handleImportInventory = async (id:string,command:ImportInventoryCommand) => {
     const eventStore = await findEventstore()
-    const result = await ImportInventoryCommandHandler(eventStore, id, (state: ImportInventoryState) => decide(command, state))
-    return {
-        nextExpectedStreamVersion: result.nextExpectedStreamVersion,
-        lastEventGlobalPosition: result.lastEventGlobalPosition
-    }
+    const result = await ImportInventoryCommandHandler(eventStore, id, (state:ImportInventoryState)=>decide(command,state))
+    return {nextExpectedStreamVersion: result.nextExpectedStreamVersion, lastEventGlobalPosition: result.lastEventGlobalPosition}
 }
 

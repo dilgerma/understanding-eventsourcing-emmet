@@ -1,28 +1,30 @@
-import type {Command} from '@event-driven-io/emmett'
-import {CommandHandler} from '@event-driven-io/emmett';
+import type { Command } from '@event-driven-io/emmett'
+import { CommandHandler } from '@event-driven-io/emmett';
 import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type SubmitCartCommand = Command<'SubmitCart', {
-    aggregateId: string
-},
-    {
-        correlation_id?: string,
-        causation_id?: string,
-        now?: Date,
-        streamName?: string,
-    }>;
+          aggregateId: string
+        },
+        {
+            correlation_id?:string,
+causation_id?:string,
+now?:Date,
+streamName?:string,
+        }>;
 
 // TODO-AI keep attributes in state optional
-export type SubmitCartState = {}
+export type SubmitCartState = {
+}
 
-export const SubmitCartInitialState = (): SubmitCartState => ({});
+export const SubmitCartInitialState = (): SubmitCartState => ({
+});
 
 export const evolve = (
     state: SubmitCartState,
     event: CartEvents,
 ): SubmitCartState => {
-    const {type, data} = event;
+    const { type, data } = event;
 
     switch (type) {
         // case "..Event":
@@ -64,33 +66,26 @@ Fields:
 # Spec End
 AI-TODO end
 */
-export const decide = (
+    export const decide = (
     command: SubmitCartCommand,
     state: SubmitCartState,
 ): CartEvents[] => {
     return [{
         type: "CartSubmitted",
-        data: {
-            aggregateId: command.data.aggregateId
-        }, metadata: {
-            correlation_id: command.metadata?.correlation_id,
-            causation_id: command.metadata?.causation_id
-        }
-    }]
+            data: {
+        			aggregateId:command.data.aggregateId
+    }, metadata: {
+        correlation_id: command.metadata?.correlation_id,
+        causation_id: command.metadata?.causation_id
+    }}]
 };
 
 
-const SubmitCartCommandHandler = CommandHandler<SubmitCartState, CartEvents>({
-    evolve,
-    initialState: SubmitCartInitialState
-});
+const SubmitCartCommandHandler = CommandHandler<SubmitCartState, CartEvents>({evolve,initialState:SubmitCartInitialState});
 
-export const handleSubmitCart = async (id: string, command: SubmitCartCommand) => {
+export const handleSubmitCart = async (id:string,command:SubmitCartCommand) => {
     const eventStore = await findEventstore()
-    const result = await SubmitCartCommandHandler(eventStore, id, (state: SubmitCartState) => decide(command, state))
-    return {
-        nextExpectedStreamVersion: result.nextExpectedStreamVersion,
-        lastEventGlobalPosition: result.lastEventGlobalPosition
-    }
+    const result = await SubmitCartCommandHandler(eventStore, id, (state:SubmitCartState)=>decide(command,state))
+    return {nextExpectedStreamVersion: result.nextExpectedStreamVersion, lastEventGlobalPosition: result.lastEventGlobalPosition}
 }
 

@@ -41,14 +41,15 @@
             },
             {
               "name": "price",
-              "type": "String",
+              "type": "Decimal",
               "example": "",
               "mapping": "",
               "optional": false,
               "generated": false,
               "cardinality": "Single",
               "idAttribute": false,
-              "excludeFromApi": false
+              "excludeFromApi": false,
+              "schema": ""
             },
             {
               "name": "itemId",
@@ -104,6 +105,8 @@
               "elementType": "SCREEN"
             }
           ],
+          "listElement": false,
+          "todoList": false,
           "apiEndpoint": "",
           "service": null,
           "createsAggregate": false,
@@ -609,14 +612,15 @@
                 },
                 {
                   "name": "price",
-                  "type": "String",
+                  "type": "Decimal",
                   "example": "",
                   "mapping": "",
                   "optional": false,
                   "generated": false,
                   "cardinality": "Single",
                   "idAttribute": false,
-                  "excludeFromApi": false
+                  "excludeFromApi": false,
+                  "schema": ""
                 },
                 {
                   "name": "itemId",
@@ -713,14 +717,15 @@
                 },
                 {
                   "name": "price",
-                  "type": "String",
+                  "type": "Decimal",
                   "example": "",
                   "mapping": "",
                   "optional": false,
                   "generated": false,
                   "cardinality": "Single",
                   "idAttribute": false,
-                  "excludeFromApi": false
+                  "excludeFromApi": false,
+                  "schema": ""
                 },
                 {
                   "name": "itemId",
@@ -2624,6 +2629,7 @@
       "context": "",
       "sliceType": "STATE_VIEW",
       "commands": [],
+      "todoList": true,
       "events": [],
       "readmodels": [
         {
@@ -3696,9 +3702,16 @@
               "type": "INBOUND",
               "title": "Item Added",
               "elementType": "EVENT"
+            },
+            {
+              "id": "3458764620568353726",
+              "type": "INBOUND",
+              "title": "Cart Published",
+              "elementType": "EVENT"
             }
           ],
           "listElement": true,
+          "todoList": true,
           "apiEndpoint": "",
           "service": null,
           "createsAggregate": false,
@@ -3824,14 +3837,14 @@
             {
               "name": "orderedProducts",
               "type": "Custom",
+              "schema": "{\n    \"productId\":\"String\",\n    \"price\":\"Decimal\"\n}",
               "example": "{\"productId\":\"1\", \"price\":\"9.99\"}",
               "mapping": "",
               "optional": false,
               "generated": false,
               "cardinality": "List",
               "idAttribute": false,
-              "excludeFromApi": false,
-              "schema": "{\n    \"productId\":\"String\",\n    \"price\":\"Decimal\"\n}"
+              "excludeFromApi": false
             },
             {
               "name": "totalPrice",
@@ -3852,6 +3865,12 @@
             "Cart"
           ],
           "dependencies": [
+            {
+              "id": "3458764620568352229",
+              "type": "OUTBOUND",
+              "title": "Carts to be published",
+              "elementType": "READMODEL"
+            },
             {
               "id": "3458764620568352253",
               "type": "INBOUND",

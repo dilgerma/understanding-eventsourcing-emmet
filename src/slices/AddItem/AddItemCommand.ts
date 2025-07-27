@@ -1,33 +1,35 @@
-import type {Command} from '@event-driven-io/emmett'
-import {CommandHandler} from '@event-driven-io/emmett';
+import type { Command } from '@event-driven-io/emmett'
+import { CommandHandler } from '@event-driven-io/emmett';
 import {CartEvents} from "../../events/CartEvents";
 import {findEventstore} from "../../common/loadPostgresEventstore";
 
 export type AddItemCommand = Command<'AddItem', {
-    aggregateId: string,
-    description: string,
-    price: number,
-    itemId: string,
-    name: string,
-    productId: string
-},
-    {
-        correlation_id?: string,
-        causation_id?: string,
-        now?: Date,
-        streamName?: string,
-    }>;
+          aggregateId: string,
+  description: string,
+  price: number,
+  itemId: string,
+  name: string,
+  productId: string
+        },
+        {
+            correlation_id?:string,
+causation_id?:string,
+now?:Date,
+streamName?:string,
+        }>;
 
 // TODO-AI keep attributes in state optional
-export type AddItemState = {}
+export type AddItemState = {
+}
 
-export const AddItemInitialState = (): AddItemState => ({});
+export const AddItemInitialState = (): AddItemState => ({
+});
 
 export const evolve = (
     state: AddItemState,
     event: CartEvents,
 ): AddItemState => {
-    const {type, data} = event;
+    const { type, data } = event;
 
     switch (type) {
         // case "..Event":
@@ -111,35 +113,31 @@ Fields:
 # Spec End
 AI-TODO end
 */
-export const decide = (
+    export const decide = (
     command: AddItemCommand,
     state: AddItemState,
 ): CartEvents[] => {
     return [{
         type: "ItemAdded",
-        data: {
-            aggregateId: command.data.aggregateId,
-            description: command.data.description,
-            itemId: command.data.itemId,
-            name: command.data.name,
-            price: command.data.price,
-            productId: command.data.productId
-        }, metadata: {
-            correlation_id: command.metadata?.correlation_id,
-            causation_id: command.metadata?.causation_id
-        }
-    }]
+            data: {
+        			aggregateId:command.data.aggregateId,
+			description:command.data.description,
+			itemId:command.data.itemId,
+			name:command.data.name,
+			price:command.data.price,
+			productId:command.data.productId
+    }, metadata: {
+        correlation_id: command.metadata?.correlation_id,
+        causation_id: command.metadata?.causation_id
+    }}]
 };
 
 
-const AddItemCommandHandler = CommandHandler<AddItemState, CartEvents>({evolve, initialState: AddItemInitialState});
+const AddItemCommandHandler = CommandHandler<AddItemState, CartEvents>({evolve,initialState:AddItemInitialState});
 
-export const handleAddItem = async (id: string, command: AddItemCommand) => {
+export const handleAddItem = async (id:string,command:AddItemCommand) => {
     const eventStore = await findEventstore()
-    const result = await AddItemCommandHandler(eventStore, id, (state: AddItemState) => decide(command, state))
-    return {
-        nextExpectedStreamVersion: result.nextExpectedStreamVersion,
-        lastEventGlobalPosition: result.lastEventGlobalPosition
-    }
+    const result = await AddItemCommandHandler(eventStore, id, (state:AddItemState)=>decide(command,state))
+    return {nextExpectedStreamVersion: result.nextExpectedStreamVersion, lastEventGlobalPosition: result.lastEventGlobalPosition}
 }
 
